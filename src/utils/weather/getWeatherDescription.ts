@@ -1,5 +1,5 @@
-import type { WeatherDescriptionItem } from "../../lib/weatherTypes"
-import descriptions from "./descriptions.json"
+import type { WeatherDescriptionItem } from "../../lib/weather/weatherTypes"
+import descriptions from "../../lib/weather/weatherDescriptions.json"
 
 interface WeatherDescriptions {
     [key: string]: {

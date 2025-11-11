@@ -1,4 +1,4 @@
-import type { WeatherDataTypes, WeatherDescriptionItem } from "../../lib/weatherTypes"
+import type { WeatherDataTypes, WeatherDescriptionItem } from "../../lib/weather/weatherTypes"
 import { GetWeatherDescription } from "./getWeatherDescription"
 
 export default class WeatherData implements WeatherDataTypes {
