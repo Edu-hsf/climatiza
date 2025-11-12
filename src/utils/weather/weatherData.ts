@@ -59,10 +59,10 @@ const formatVisibilityList = (data: number[]): number[] => {
   return data
 }
 
-const formatDescriptionList = async (data: number[]): Promise<WeatherDescriptionItem[]> => {
+const formatDescriptionList = (data: number[]): WeatherDescriptionItem[] => {
   const descriptions: WeatherDescriptionItem[] = []
   for (let i = 0; i < data.length; i++) {
-    descriptions.push(await GetWeatherDescription(data[i], 1))
+    descriptions.push(GetWeatherDescription(data[i], 1))
   }
   return descriptions
 } 

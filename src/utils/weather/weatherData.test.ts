@@ -7,7 +7,7 @@ describe('WeatherData', () => {
 
     new WeatherData(mockData)
 
-    expect(GetWeatherDescriptionSpy).toHaveBeenCalledTimes(3)
+    expect(GetWeatherDescriptionSpy).toHaveBeenCalledTimes(5)
   })
 
   it('Deve criar o a classe weatherData.current com as as propriedade certas', async () => {
@@ -17,7 +17,7 @@ describe('WeatherData', () => {
 
     expect(weather.current.time).toBe('13:45')
     expect(weather.current.temp).toBe(79)
-    expect(await weather.current.description).toEqual({
+    expect(weather.current.description).toEqual({
       description: 'Sunny',
       image: 'image.png'
     })
@@ -33,7 +33,7 @@ describe('WeatherData', () => {
     expect(weather.hourly.time[0]).toBe("00:00")
     expect(weather.hourly.temp[0]).toBe(69)
     expect(weather.hourly.visibility[0]).toBe(24)
-    expect((await weather.hourly.descriptions)[0]).toEqual({
+    expect((weather.hourly.descriptions)[0]).toEqual({
       description: 'Sunny',
       image: 'image.png'
     })
@@ -46,7 +46,7 @@ describe('WeatherData', () => {
     
     expect(weather.daily.time[0]).toBe("04/11/2025")
     expect(weather.daily.tempMax[0]).toBe(79)
-    expect((await weather.daily.descriptions)[0]).toEqual({
+    expect((weather.daily.descriptions)[0]).toEqual({
       description: 'Sunny',
       image: 'image.png'
     })
@@ -55,7 +55,7 @@ describe('WeatherData', () => {
 
 const makeMock = () => {
   const GetWeatherDescriptionSpy = vi
-    .spyOn(GetWeatherDescriptionMod, 'GetWeatherDescription').mockResolvedValue({
+    .spyOn(GetWeatherDescriptionMod, 'GetWeatherDescription').mockReturnValue({
       description: 'Sunny',
       image: 'image.png'
     })

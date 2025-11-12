@@ -10,18 +10,18 @@ export interface WeatherDataTypes {
         windSpeed: number
         humidity: number
         cloudCover: number
-        description: Promise<WeatherDescriptionItem>
+        description: WeatherDescriptionItem
     }
     hourly: {
         time: string[]
         temp: number[]
         visibility: number[]
-        descriptions: Promise<WeatherDescriptionItem[]>
+        descriptions: WeatherDescriptionItem[]
     }
     daily: {
         time: string[]
         tempMax: number[]
         tempMin: number[]
-        descriptions: Promise<WeatherDescriptionItem[]>
+        descriptions: WeatherDescriptionItem[]
     }
 }

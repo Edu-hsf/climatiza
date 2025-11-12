@@ -10,10 +10,10 @@ interface WeatherDescriptions {
 
 const descriptionsData = descriptions as WeatherDescriptions;
 
-async function GetWeatherDescription (
+function GetWeatherDescription (
     code: number, 
     isDay: number
-): Promise<WeatherDescriptionItem> {
+) {
     return isDay ? descriptionsData[String(code)].day : descriptionsData[String(code)].night
 } 
 
