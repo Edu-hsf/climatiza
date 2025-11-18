@@ -1,6 +1,6 @@
 import getOpenMeteoAPI from "./openMeteoAPI"
 
-describe('openMeteoAPI', () =>  {
+describe('getOpenMeteoAPI', () =>  {
     it('Deve retornar os dados da API corretamente', async () => {
         const dataAPI = await getOpenMeteoAPI('-16', '-48')
 
