@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config'
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   test: {
@@ -6,4 +7,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './vitest-setup.ts',
   },
+  plugins: [
+    tailwindcss(),
+  ]
 })
