@@ -9,13 +9,14 @@
 @theme {
   --font-display: 'Montserrat';
 
-  --color-light: #fff;
-  --color-dark: #000;
-
   --color-liquidglass-light: rgba(49, 58, 255, 0.1);
   --color-active-light: rgba(103, 222, 255, 0.45);
   --color-liquidglass-dark: rgba(7, 11, 83, 0.1);
   --color-active-dark: rgba(21, 19, 97, 0.45);
+
+  --breakpoint-mobile: 375px;
+  --breakpoint-tablet: 565px;
+  --breakpoint-desktop: 1024px;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
