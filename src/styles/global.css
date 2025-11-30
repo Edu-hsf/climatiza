@@ -1,0 +1,21 @@
+@import 'tailwindcss';
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300 500;
+  src: 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap';
+}
+
+@theme {
+  --font-display: 'Montserrat';
+
+  --color-light: #fff;
+  --color-dark: #000;
+
+  --color-liquidglass-light: rgba(49, 58, 255, 0.1);
+  --color-active-light: rgba(103, 222, 255, 0.45);
+  --color-liquidglass-dark: rgba(7, 11, 83, 0.1);
+  --color-active-dark: rgba(21, 19, 97, 0.45);
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
