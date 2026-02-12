@@ -7,6 +7,12 @@
     "module": "ESNext",
     "types": ["vite/client", "vitest/globals", "@testing-library/react", "@testing-library/jest-dom", "node"],
     "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",
