@@ -1,8 +1,9 @@
 @import 'tailwindcss';
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@theme {
 
+@theme {
+  --font-display: 'Inter', sans-serif;
 
   --breakpoint-mobile: 375px;
   --breakpoint-tablet: 565px;
