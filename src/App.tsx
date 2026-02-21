@@ -1,9 +1,9 @@
-import { useAppDispatch, useAppSelector } from '@/hooks';
+import { useAppDispatch } from '@/hooks';
 import { changeLocationAsync } from '@/store/locationSlice';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
-export function DefaultLayout() {
+export default function App() {
   const dispatch = useAppDispatch()
   useEffect(() => {
     dispatch(changeLocationAsync())
@@ -11,10 +11,8 @@ export function DefaultLayout() {
   }, [dispatch])
 
   return (
-    <div className="app-container">
-      <main className="main-content">
+    <div>
         <Outlet />
-      </main>
     </div>
   );
 }

@@ -1,9 +1,9 @@
-import HeaderIconButton from "./HeaderIconButton";
+import HeaderButton from "./HeaderButton";
 import HeaderRoot from "./HeaderRoot";
-import HeaderTitle from "./HeaderTitle";
+import HeaderInfo from "./HeaderInfo";
 
 export const Header = {
     Root: HeaderRoot,
-    Title: HeaderTitle,
-    IconButton: HeaderIconButton,
+    Info: HeaderInfo,
+    HeaderButton: HeaderButton,
 }

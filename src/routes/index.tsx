@@ -1,11 +1,11 @@
 import { Routes as RouterSwitch, Route } from 'react-router-dom';
 import { Home } from '../pages/Home';
-import { DefaultLayout } from '../layouts/DefaultLayout';
+import App from '@/App';
 
 export default function Routes() {
   return (
     <RouterSwitch>
-      <Route element={<DefaultLayout />}>
+      <Route element={<App />}>
         <Route path="/" element={<Home />} />
       </Route>
     </RouterSwitch>

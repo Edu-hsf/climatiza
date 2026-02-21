@@ -6,7 +6,7 @@ interface HeaderRootProps {
 
 export default function HeaderRoot ({ children }: HeaderRootProps) {
     return (
-        <div className="grid grid-cols-[1fr_auto_1fr] grid-flow-row px-4 h-auto">
+        <div className="flex flex-row justify-between p-8">
             { children }
         </div>
     )
