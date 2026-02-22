@@ -3,6 +3,7 @@ import { MapPinIcon, Settings } from "lucide-react"
 import { useAppSelector } from "@/hooks";
 import CurrentWeather from "@/components/CurrentWeather";
 import Forecast from "@/components/Forecast"
+import DetailedForecastButton from "@/components/DetailedForecastButton";
 
 export function Home() {
   const location = useAppSelector(state => state.location)
@@ -21,6 +22,7 @@ export function Home() {
       <main className="px-6 py-20 h-full flex flex-col items-center gap-12">
         <CurrentWeather/>
         <Forecast/>
+        <DetailedForecastButton/>
       </main>
     </div>
   );
