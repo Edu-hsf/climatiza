@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 
 body {
-  background-color: silver;
+  background-color: rgb(85, 85, 85);
   height: 100vh;
 }
 
@@ -110,8 +110,8 @@ body {
   }
 }
 
-.glass {
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+@layer components {
+  .glass {
+    @apply bg-white/10 backdrop-blur-md
+  }
 }

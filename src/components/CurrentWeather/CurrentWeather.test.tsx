@@ -21,6 +21,10 @@ describe('CurrentWeather', () => {
         const { container } = render(<CurrentWeather/>)
         const root = container.firstChild as HTMLElement
 
-        expect(root).toHaveClass('flex flex-col items-center')
+        expect(root).toHaveClass(
+            'flex', 
+            'flex-col', 
+            'items-center'
+        )
     })
 })
