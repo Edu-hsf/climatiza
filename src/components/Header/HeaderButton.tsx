@@ -4,18 +4,16 @@ interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
 }
 
-export default function HeaderIconButton({ children, ...props }: HeaderButtonProps) {
+export default function HeaderIconButton({ children }: HeaderButtonProps) {
     return (
         <button  
             className="
                 glass 
-                text-white
                 w-fit
                 h-fit
                 p-3
                 rounded-full
             "
-            {...props}
         >
             {children}
         </button>
