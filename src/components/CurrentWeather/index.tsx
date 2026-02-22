@@ -14,7 +14,7 @@ export default function CurrentWeather () {
                 <CloudDrizzle size={80}/>
             </div>
 
-            <h1 className="text-8xl mb-4">
+            <h1 className="text-7xl md:text-8xl mb-4">
                 28°C
             </h1>
 
