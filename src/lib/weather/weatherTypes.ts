@@ -1,27 +1,30 @@
-export interface WeatherDescriptionItem {
-    description: string
-    image: string
-}
+type currentWeather = {
+    time: Date;
+    temperature: number;
+    apparentTemp: number;
+    windSpeed: number;
+    humidity: number;
+    cloudCover: number;
+    weatherCode: number;
+    isDay: boolean;
+};
+
+type hourly = {
+    time: Date;
+    temperature: number;
+    visibility: number;
+    weatherCode: number;
+};
+
+type daily = {
+    time: Date;
+    temperatureMax: number;
+    temperatureMin: number;
+    weatherCode: number;
+};
+
 export interface WeatherDataTypes {
-    current: {
-        time: string
-        temp: number
-        apparentTemp: number
-        windSpeed: number
-        humidity: number
-        cloudCover: number
-        description: WeatherDescriptionItem
-    }
-    hourly: {
-        time: string[]
-        temp: number[]
-        visibility: number[]
-        descriptions: WeatherDescriptionItem[]
-    }
-    daily: {
-        time: string[]
-        tempMax: number[]
-        tempMin: number[]
-        descriptions: WeatherDescriptionItem[]
-    }
+    currentWeather: currentWeather;
+    hourly: hourly[];
+    daily: daily[];
 }
