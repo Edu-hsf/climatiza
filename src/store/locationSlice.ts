@@ -9,9 +9,9 @@ export interface LocationState {
 }
 
 interface LocationPayload {
-  coordinates: { lat: number; long: number }
-  country: string
-  city: string
+    coordinates: { lat: number; long: number }
+    country: string
+    city: string
 }
 
 const initialState: LocationState = {
@@ -22,25 +22,31 @@ const initialState: LocationState = {
 }
 
 export const changeLocationAsync = createAsyncThunk<LocationPayload>(
-        'location/changeLocationAsync',
-        async () => {
-            if (!("geolocation" in navigator)) throw new Error('Unfortunately, your browser is not compatible with location services.')
+    'location/changeLocationAsync',
+    async () => {
+        if (!("geolocation" in navigator)) throw new Error('Unfortunately, your browser is not compatible with location services.');
 
-            const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition(resolve, reject)
-            })
+        const options: PositionOptions = {
+            enableHighAccuracy: true,
+            timeout: undefined,
+            maximumAge: 0,
+        };
 
-            const { latitude, longitude } = position.coords
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
 
-            const currentlocation = await getLocationByCoordinates(latitude, longitude)
+        const { latitude, longitude } = position.coords;
 
-            return {
-                coordinates: { lat: latitude, long: longitude },
-                country: currentlocation.features[0].properties.context.country.name,
-                city: currentlocation.features[0].properties.name
-            }
-        }
-    )
+        const currentlocation = await getLocationByCoordinates(latitude, longitude);
+
+        return {
+            coordinates: { lat: latitude, long: longitude },
+            country: currentlocation.features[0].properties.context.country.name,
+            city: currentlocation.features[0].properties.name,
+        };
+    }
+);
 
 export const locationSlice = createSlice({
     name: 'location',

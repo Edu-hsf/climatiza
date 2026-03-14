@@ -6,7 +6,8 @@ import Forecast from "@/components/Forecast"
 import DetailedForecastButton from "@/components/DetailedForecastButton";
 
 export function Home() {
-  const location = useAppSelector(state => state.location)
+  const location = useAppSelector(state => state.location);
+  console.log(location);
   
   return (
     <div className="h-full">
