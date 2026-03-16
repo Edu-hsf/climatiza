@@ -4,8 +4,10 @@ type currentWeather = {
     apparentTemp: number;
     windSpeed: number;
     humidity: number;
-    cloudCover: number;
+    pressure: number;
+    precipitation: number;
     weatherCode: number;
+    weatherDescription:  string;
     isDay: boolean;
 };
 
@@ -14,13 +16,15 @@ type hourly = {
     temperature: number;
     visibility: number;
     weatherCode: number;
+    weatherDescription: string;
 };
 
 type daily = {
     time: Date;
     temperatureMax: number;
-    temperatureMin: number;
+    temperatureMin: number; 
     weatherCode: number;
+    weatherDescription: string;
 };
 
 export interface WeatherDataTypes {

@@ -6,4 +6,4 @@ export const Header = {
     Root: HeaderRoot,
     Info: HeaderInfo,
     HeaderButton: HeaderButton,
-}
+} 

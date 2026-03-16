@@ -4,11 +4,7 @@
 
 body {
   background-color: rgb(85, 85, 85);
-  height: 100vh;
-}
-
-#root {
-  height: 100%;
+  min-height: 100dvh;
 }
 
 @theme {
@@ -113,5 +109,9 @@ body {
 @layer components {
   .glass {
     @apply bg-white/10 backdrop-blur-md
+  }
+
+  .glass-border {
+    @apply bg-white/10 backdrop-blur-md border border-white/20
   }
 }

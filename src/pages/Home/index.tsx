@@ -5,12 +5,11 @@ import CurrentWeather from "@/components/CurrentWeather";
 import Forecast from "@/components/Forecast"
 import DetailedForecastButton from "@/components/DetailedForecastButton";
 
-export function Home() {
+export function Home() {  
   const location = useAppSelector(state => state.location);
-  console.log(location);
   
   return (
-    <div className="h-full">
+    <>
       <Header.Root>
         <Header.Info>
           <MapPinIcon size={20} />
@@ -25,6 +24,6 @@ export function Home() {
         <Forecast/>
         <DetailedForecastButton/>
       </main>
-    </div>
+    </>
   );
 }

@@ -2,7 +2,7 @@ import { getLocationByCoordinates } from '@/services/mapBox/mapBoxAPI';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 export interface LocationState {
-    status: 'idle' | 'loading' | 'failed'
+    status: 'idle' | 'loading' | 'succeeded' | 'failed'
     coordinates: { lat: number; long: number };
     country: string;
     city: string;
@@ -64,7 +64,7 @@ export const locationSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(changeLocationAsync.fulfilled, (state, action) => {
-                state.status = 'idle'
+                state.status = 'succeeded'
                 state.coordinates = action.payload.coordinates;
                 state.country = action.payload.country;
                 state.city = action.payload.city;
