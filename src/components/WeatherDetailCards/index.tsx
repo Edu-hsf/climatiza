@@ -1,5 +1,6 @@
 import type { LucideProps } from "lucide-react"
 import type { ComponentType } from "react"
+import { Card } from "../ui/card"
 
 interface WeatherDetailCardsProps {
     icon: ComponentType<LucideProps>
@@ -9,10 +10,10 @@ interface WeatherDetailCardsProps {
 
 export default function WeatherDetailCards ({icon: Icon, label, data}: WeatherDetailCardsProps) {
     return (
-        <div className="glass-border rounded-2xl p-6">
+        <Card>
             <Icon size={28} className="mb-3"/>
-            <p className="text-white/70 text-sm mb-1">{label}</p>
+            <p className="text-muted-foreground text-sm mb-1">{label}</p>
             <p className="text-xl">{data}</p>
-        </div>
+        </Card>
     )
 }

@@ -1,9 +1,9 @@
 import { type LucideProps } from "lucide-react"
-import type { ComponentType } from "react"
+import type { ComponentType, ForwardRefExoticComponent } from "react"
 
 interface ForecastItemProps {
     time?: string
-    icon?: ComponentType<LucideProps>
+    icon?: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>
     temperature?: string
 }
 
@@ -12,15 +12,15 @@ export default function ForecastItem ({ time, icon: Icon, temperature }: Forecas
         <div className="
             flex 
             flex-col 
-            glass 
+            glass-border 
             rounded-2xl 
-            p-6 border 
-            border-white/20 
-            hover:bg-white/15 
+            p-6
             gap-3 
             text-center
+            hover:opacity-80
+            transition-opacity
         ">
-            <p className="text-white/80">
+            <p className="text-muted-foreground">
                 {time}
             </p>
             <div className="flex justify-center">

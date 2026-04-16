@@ -19,13 +19,14 @@ export default class WeatherData implements WeatherDataTypes {
       isDay: Boolean(data.current.weather_code),
     };
 
-    for (let i = 0; i <= 4; i++) {
+    for (let i = 0; i < 28; i++) {
       this.hourly.push({
         time: new Date(data.hourly.time[i]),
         temperature: Math.round(data.hourly.temperature_2m[i]),
         visibility: Math.round(data.hourly.visibility[i] / 1000),
         weatherCode: data.hourly.weather_code[i],
         weatherDescription: getWeatherDescription(data.hourly.weather_code[i]),
+        isDay: new Date(data.hourly.time[i]).getHours() >= 6 && new Date(data.hourly.time[i]).getHours() < 18
       })
     };
 

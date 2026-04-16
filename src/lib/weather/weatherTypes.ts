@@ -17,6 +17,7 @@ type hourly = {
     visibility: number;
     weatherCode: number;
     weatherDescription: string;
+    isDay: boolean;
 };
 
 type daily = {

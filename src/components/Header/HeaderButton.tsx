@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react"
 import { NavLink } from "react-router-dom"
+import { Button } from "../ui/button"
 
 interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
@@ -7,20 +8,8 @@ interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function HeaderIconButton({ children }: HeaderButtonProps) {
     return (
-        <NavLink to='/settings'>
-            <button
-                className="
-                glass 
-                w-fit
-                h-fit
-                p-3
-                rounded-full
-                hover:bg-white/15 
-                cursor-pointer
-            "
-            >
-                {children}
-            </button>
-        </NavLink>
+        <Button variant="ghost" size="icon">
+            {children}
+        </Button>
     )
 }
