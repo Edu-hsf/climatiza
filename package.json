@@ -12,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@base-ui/react": "^1.4.0",
     "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.17",
     "@types/react-router-dom": "^5.3.3",
