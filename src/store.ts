@@ -1,10 +1,12 @@
 import { configureStore, type Action, type ThunkAction } from '@reduxjs/toolkit'
 import locationReducer from './store/locationSlice'
+import weatherReducer from './store/weatherSlice'
 // ...
 
 export const store = configureStore({
   reducer: {
     location: locationReducer,
+    weather: weatherReducer,
   }
 })
 

@@ -12,7 +12,7 @@ export default function App() {
   }, [dispatch]);
 
   return (
-    <div className='h-full'>
+    <div className='h-full mb-6'>
       <BrowserRouter>
           <Routes />
       </BrowserRouter>

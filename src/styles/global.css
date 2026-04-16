@@ -3,7 +3,10 @@
 @import "shadcn/tailwind.css";
 
 body {
-  background-color: var(--background);
+  background-image: url('/src/assets/images/backgrounds/temponublado.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   min-height: 100dvh;
 }
 
@@ -68,7 +71,7 @@ body {
   
   /* Accent - Cyan/Light Blue #00b8dc */
   --accent: oklch(0.675 0.185 195.39);
-  --accent-foreground: oklch(0.15 0 0);
+  --accent-foreground: oklch(88.552% 0.10005 197.13);
   
   /* Glass Effect Components - OKLCH format */
   --glass: oklch(1 0 0 / 0.1);       /* Background com 10% opacidade */

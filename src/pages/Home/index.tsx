@@ -1,45 +1,44 @@
 import { Header } from "@/components/Header";
 import { MapPinIcon, Settings } from "lucide-react"
-import { useAppSelector } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import ForecastItem from "@/components/Forecast/ForecastItem";
-import { useEffect, useState } from "react";
-import getOpenMeteoAPI from "@/services/openMeteo/openMeteoAPI";
-import WeatherData from "@/utils/weather/weatherData";
+import { useEffect } from "react";
 import getWeatherIcon from "@/components/WeatherIcons";
+import { fetchWeatherAsync } from "@/store/weatherSlice";
 
 export function Home() {
+  const dispatch = useAppDispatch();
   const location = useAppSelector(state => state.location);
-  const [weather, setWeather] = useState<WeatherData | null>(null);
-  
+  const weather = useAppSelector(state => state.weather);
+
   useEffect(() => {
-    if (location.status != 'succeeded') return;
+    if (location.status !== 'succeeded') return;
+    if (weather.data) return; // Se já tem dados, não recarrega
 
-    async function fetchWeather() {
-      const data = await getOpenMeteoAPI(location.coordinates.lat.toString(), location.coordinates.long.toString());
+    dispatch(fetchWeatherAsync({
+      lat: location.coordinates.lat.toString(),
+      long: location.coordinates.long.toString()
+    }));
+  }, [location.status, dispatch, weather.data])
 
-      setWeather(new WeatherData(data));
-    };
-
-    fetchWeather();
-  }, [location.status, location.coordinates.lat, location.coordinates.long])
-
-  if (!weather) {
+  if (weather.status !== 'succeeded' || !weather.data) {
     return <div>Carregando...</div>
   }
 
-  const currentTime = new Date(weather.currentWeather.time.setMinutes(0, 0, 0)) 
+  const currentTime = new Date(weather.data.currentWeather.time);
+  currentTime.setMinutes(0, 0, 0)
 
-  const currentIndex = weather.hourly.findIndex(
+  const currentIndex = weather.data.hourly.findIndex(
     item => item.time.getTime() === currentTime.getTime()
   );
 
-  const hourly = currentIndex !== -1 
-  ? weather.hourly.slice(currentIndex + 1, currentIndex + 5) 
-  : [];
+  const hourly = currentIndex !== -1
+    ? weather.data.hourly.slice(currentIndex + 1, currentIndex + 5)
+    : [];
 
-  const CurrentWeatherIcon = getWeatherIcon(weather.currentWeather.weatherCode, weather.currentWeather.isDay)
+  const CurrentWeatherIcon = getWeatherIcon(weather.data.currentWeather.weatherCode, weather.data.currentWeather.isDay)
 
   return (
     <>
@@ -48,9 +47,11 @@ export function Home() {
           <MapPinIcon size={20} />
           {location.city}, {location.country}
         </Header.Info>
-        <Header.HeaderButton>
-          <Settings size={24} />
-        </Header.HeaderButton>
+        <NavLink to='settings'>
+          <Header.HeaderButton>
+            <Settings size={24} />
+          </Header.HeaderButton>
+        </NavLink>
       </Header.Root>
       <main className="px-6 py-20 h-full flex flex-col items-center gap-12">
         <div className="flex flex-col items-center">
@@ -59,11 +60,11 @@ export function Home() {
           </div>
 
           <h1 className="text-7xl md:text-8xl mb-4">
-            {`${weather.currentWeather.temperature}°C`}
+            {`${weather.data.currentWeather.temperature}°C`}
           </h1>
 
           <p className="text-2xl">
-            {weather.currentWeather.weatherDescription}
+            {weather.data.currentWeather.weatherDescription}
           </p>
         </div>
         <div className="w-full max-w-4xl">
