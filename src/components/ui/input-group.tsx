@@ -7,12 +7,13 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 interface InputProps extends React.ComponentProps<"input"> {
-  variant?: "default" | "glass"
+  variant?: "default" | "glass" | "glassBorder"
 }
 
 const variants = {
   default: "border border-input bg-transparent",
-  glass: "glass-border",
+  glass: "glass",
+  glassBorder: "glass-border",
 }
 
 function InputGroup({ className, variant = "default", ...props }: InputProps) {
@@ -109,7 +110,7 @@ const inputGroupButtonVariants = cva(
 function InputGroupButton({
   className,
   type = "button",
-  variant = "ghost",
+  variant = "default",
   size = "xs",
   ...props
 }: Omit<React.ComponentProps<typeof Button>, "size"> &

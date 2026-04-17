@@ -8,7 +8,7 @@ interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export default function HeaderIconButton({ children }: HeaderButtonProps) {
     return (
-        <Button variant="ghost" size="icon">
+        <Button variant="glass" size="icon">
             {children}
         </Button>
     )

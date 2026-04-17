@@ -6,7 +6,6 @@ import {
   ArrowLeft,
   CalendarDays,
   Thermometer,
-  TrendingUp,
   Wind,
   Droplet,
   Eye,
@@ -18,7 +17,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
