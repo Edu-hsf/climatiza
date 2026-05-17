@@ -1,4 +1,4 @@
-import { getCoordinatesBySearch, getLocationByCoordinates } from "./mapBox.api"
+import { getCoordinatesBySearch, getLocationByCoordinates } from "./location.api"
 
 describe('getCoordinatesBySearch', () => {
     it('Deve retornar uma lista de localizações conforme a resposta da API para o termo pesquisado', async () => {
