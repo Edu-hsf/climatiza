@@ -16,7 +16,7 @@ export default function getWeatherIcon(
     isDay: boolean,
 ) {
     // céu limpo
-    if (code === 0) {
+    if (code === 0) {   
         return isDay ? Sun : Moon
     }
 

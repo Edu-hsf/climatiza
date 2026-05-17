@@ -1,7 +1,7 @@
 import getWeather from './weather.service'
-import { weatherMapper } from './weather.mapper'
-import { weatherMock } from './weather.mock'
+import { weatherMap } from './weather.mapper'
 import weatherFetch from './weather.client'
+import { weatherMock } from './weather.mock'
 
 vi.mock('./weather.client')
 
@@ -18,7 +18,7 @@ describe('getWeather', () => {
 })
 
 describe('weatherMapper', () => {
-    const data = weatherMapper(weatherMock)
+    const data = weatherMap(weatherMock)
 
     it('Deve formatar corretamente os dados atuais do clima', () => {
         expect(data.current.time.toLocaleDateString('pt-BR')).toBe('17/05/2026')
