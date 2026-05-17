@@ -20,7 +20,8 @@ const initialState: WeatherState = {
 export const fetchWeatherAsync = createAsyncThunk<WeatherData, FetchWeatherPayload>(
     'weather/fetchWeatherAsync',
     async (coordinates) => {
-        const data = await getOpenMeteoAPI(coordinates.lat, coordinates.long);
+        const data = await getOpenMeteoAPI(coordinates.lat, coordinates.long);  
+        
         return new WeatherData(data);
     }
 );

@@ -7,7 +7,7 @@ export default class WeatherData implements WeatherDataTypes {
 
   constructor(data: any) {
     this.currentWeather = {
-      time: new Date(data.current.time),
+      time: data.current.time,
       temperature: Math.round(data.current.temperature_2m),
       apparentTemp: Math.round(data.current.apparent_temperature),
       windSpeed: Math.round(data.current.wind_speed_10m),
@@ -21,7 +21,7 @@ export default class WeatherData implements WeatherDataTypes {
 
     for (let i = 0; i < 28; i++) {
       this.hourly.push({
-        time: new Date(data.hourly.time[i]),
+        time: data.hourly.time[i],
         temperature: Math.round(data.hourly.temperature_2m[i]),
         visibility: Math.round(data.hourly.visibility[i] / 1000),
         weatherCode: data.hourly.weather_code[i],
@@ -32,7 +32,7 @@ export default class WeatherData implements WeatherDataTypes {
 
     for (let i = 0; i <= 7; i++) {
       this.daily.push({
-        time: new Date(data.daily.time[i] + 'T00:00'),
+        time: data.daily.time[i],
         temperatureMax: Math.round(data.daily.temperature_2m_max[i]),
         temperatureMin: Math.round(data.daily.temperature_2m_min[i]),
         weatherCode: data.daily.weather_code[i],

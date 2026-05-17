@@ -8,10 +8,10 @@ export interface LocationState {
     city: string;
 }
 
-interface LocationPayload {
-    coordinates: { lat: number; long: number }
-    country: string
+interface LocationPayload {  
     city: string
+    country: string
+    coordinates: { lat: number; long: number }
 }
 
 const initialState: LocationState = {
