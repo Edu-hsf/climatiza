@@ -1,4 +1,4 @@
-import getOpenMeteoAPI from "./openMeteoAPI"
+import getOpenMeteoAPI from "./openMeteo.api"
 
 describe('getOpenMeteoAPI', () =>  {
     it('Deve retornar os dados da API corretamente', async () => {

@@ -1,4 +1,4 @@
-import getOpenMeteoAPI from '@/services/openMeteo/openMeteoAPI';
+import getOpenMeteoAPI from '@/services/openMeteo/openMeteo.api';
 import WeatherData from '@/utils/weather/weatherData';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 

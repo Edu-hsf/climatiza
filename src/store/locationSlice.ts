@@ -1,4 +1,4 @@
-import { getLocationByCoordinates } from '@/services/mapBox/mapBoxAPI';
+import { getLocationByCoordinates } from '@/services/mapBox/mapBox.api';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
 
 export interface LocationState {
