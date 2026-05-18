@@ -9,7 +9,7 @@ export default async function weatherFetch<T>(path: string, options: RequestInit
     })
 
     if (!response.ok) {
-        throw new Error('Error in location API request.');
+        throw new Error('Error in weather API request.');
     }
 
     return response.json() as Promise<T>
