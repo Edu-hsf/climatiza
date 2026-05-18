@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 interface InputProps extends React.ComponentProps<"input"> {
   variant?: "default" | "glass"
@@ -9,7 +9,7 @@ interface InputProps extends React.ComponentProps<"input"> {
 const variants = {
   default: "border border-input bg-transparent",
   glass: "glass-border",
-}
+};
 
 function Input({ className, type, variant = "default", ...props }: InputProps) {
   return (
@@ -21,11 +21,11 @@ function Input({ className, type, variant = "default", ...props }: InputProps) {
         variants[variant],
         "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
         "aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40",
-        className
+        className,
       )}
       {...props}
     />
-  )
+  );
 }
 
-export { Input }
+export { Input };

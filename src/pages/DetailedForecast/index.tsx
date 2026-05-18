@@ -10,37 +10,37 @@ import {
   Droplet,
   Eye,
   Gauge,
-  Sun
+  Sun,
 } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartContainer,
   ChartTooltip,
   type ChartConfig,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 import { NavLink } from "react-router-dom";
 
 export function DetailedForecast() {
   const weather = useAppSelector(state => state.weather);
 
   if (weather.status !== 'succeeded' || !weather.data) {
-    return <div>Carregando...</div>
+    return <div>Carregando...</div>;
   }
 
   const weatherData = weather.data;
   const formater = new Intl.DateTimeFormat('pt-BR', {
-    dateStyle: 'full'
+    dateStyle: 'full',
   });
 
   const chartData = () => {
-    let data: { time: string, temperature: number }[] = [];
+    const data: { time: string, temperature: number }[] = [];
 
     for (let i = 0; i < 24; i++) {
       data.push({
@@ -54,16 +54,16 @@ export function DetailedForecast() {
     };
 
     return data;
-  }
+  };
 
   const chartConfig = {
     temperature: {
       label: "Temperatura",
       color: "var(--chart-2)",
     },
-  } satisfies ChartConfig
+  } satisfies ChartConfig;
 
-  const CurrentWeatherIcon = getWeatherIcon(weatherData.currentWeather.weatherCode, weatherData.currentWeather.isDay)
+  const CurrentWeatherIcon = getWeatherIcon(weatherData.currentWeather.weatherCode, weatherData.currentWeather.isDay);
 
   return (
     <>

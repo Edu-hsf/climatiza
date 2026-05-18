@@ -1,4 +1,4 @@
-import type { WeatherDataTypes } from "../../lib/weather/weatherTypes"
+import type { WeatherDataTypes } from "../../lib/weather/weatherTypes";
 
 export default class WeatherData implements WeatherDataTypes {
   currentWeather: WeatherDataTypes['currentWeather'];
@@ -26,8 +26,8 @@ export default class WeatherData implements WeatherDataTypes {
         visibility: Math.round(data.hourly.visibility[i] / 1000),
         weatherCode: data.hourly.weather_code[i],
         weatherDescription: getWeatherDescription(data.hourly.weather_code[i]),
-        isDay: new Date(data.hourly.time[i]).getHours() >= 6 && new Date(data.hourly.time[i]).getHours() < 18
-      })
+        isDay: new Date(data.hourly.time[i]).getHours() >= 6 && new Date(data.hourly.time[i]).getHours() < 18,
+      });
     };
 
     for (let i = 0; i <= 7; i++) {
@@ -37,7 +37,7 @@ export default class WeatherData implements WeatherDataTypes {
         temperatureMin: Math.round(data.daily.temperature_2m_min[i]),
         weatherCode: data.daily.weather_code[i],
         weatherDescription: getWeatherDescription(data.daily.weather_code[i]),
-      })
+      });
     }
   }
 }
@@ -45,48 +45,48 @@ export default class WeatherData implements WeatherDataTypes {
 const getWeatherDescription = (code: number) => {
   // céu limpo
   if (code === 0) {
-    return 'ceú limpo'
+    return 'ceú limpo';
   }
 
   // parcialmente nublado
   if (code === 1 || code === 2) {
-    return 'parcialmente nublado'
+    return 'parcialmente nublado';
   }
 
   // nublado
   if (code === 3) {
-    return 'nublado'
+    return 'nublado';
   }
 
   // nevoeiro
   if (code === 45 || code === 48) {
-    return 'nevoeiro'
+    return 'nevoeiro';
   }
 
   // garoa
   if (code >= 51 && code <= 57) {
-    return 'garoa'
+    return 'garoa';
   }
 
   // chuva
   if (code >= 61 && code <= 67) {
-    return 'chuva'
+    return 'chuva';
   }
 
   // neve
   if (code >= 71 && code <= 77) {
-    return 'neve'
+    return 'neve';
   }
 
   // pancadas
   if (code >= 80 && code <= 82) {
-    return 'pancadas'
+    return 'pancadas';
   }
 
   // tempestade
   if (code >= 95) {
-    return 'tempestade'
+    return 'tempestade';
   }
 
-  return 'céu limpo'
-}
+  return 'céu limpo';
+};

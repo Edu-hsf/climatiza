@@ -1,4 +1,4 @@
-import { type Feature, type Location } from './location.types'
+import { type Feature, type Location } from './location.types';
 
 export function locationMapper(
   feature: Feature,
@@ -36,5 +36,5 @@ export function locationMapper(
 
     type:
       feature.properties.feature_type,
-  }
+  };
 }

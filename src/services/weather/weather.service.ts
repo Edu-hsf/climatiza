@@ -1,7 +1,7 @@
-import weatherFetch from './weather.client'
-import { weatherMap } from './weather.mapper'
+import weatherFetch from './weather.client';
+import { weatherMap } from './weather.mapper';
 
-import type { WeatherAPI } from './weather.types'
+import type { WeatherAPI } from './weather.types';
 
 export default async function getWeather(
     lat: string,
@@ -35,9 +35,9 @@ export default async function getWeather(
         ].join(','),
 
         timezone: 'America/Sao_Paulo',
-    })
+    });
 
-    const data = await weatherFetch<WeatherAPI>(`/v1/forecast?${params.toString()}`)
+    const data = await weatherFetch<WeatherAPI>(`/v1/forecast?${params.toString()}`);
 
-    return weatherMap(data)
+    return weatherMap(data);
 }

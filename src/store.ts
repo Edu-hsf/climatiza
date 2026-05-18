@@ -1,14 +1,14 @@
-import { configureStore, type Action, type ThunkAction } from '@reduxjs/toolkit'
-import locationReducer from './store/locationSlice'
-import weatherReducer from './store/weatherSlice'
+import { configureStore, type Action, type ThunkAction } from '@reduxjs/toolkit';
+import locationReducer from './store/locationSlice';
+import weatherReducer from './store/weatherSlice';
 // ...
 
 export const store = configureStore({
   reducer: {
     location: locationReducer,
     weather: weatherReducer,
-  }
-})
+  },
+});
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

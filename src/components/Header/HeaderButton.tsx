@@ -1,6 +1,5 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react"
-import { NavLink } from "react-router-dom"
-import { Button } from "../ui/button"
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { Button } from "../ui/button";
 
 interface HeaderButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
@@ -11,5 +10,5 @@ export default function HeaderIconButton({ children }: HeaderButtonProps) {
         <Button variant="glass" size="icon">
             {children}
         </Button>
-    )
+    );
 }

@@ -8,15 +8,15 @@ export function Settings() {
   const cities = [
     {
       name: "París",
-      country: "França"
+      country: "França",
     },
     {
       name: "Londres",
-      country: "Reino Unido"
+      country: "Reino Unido",
     },
     {
       name: "New York",
-      country: "Estados Unidos"
+      country: "Estados Unidos",
     },
   ];
 

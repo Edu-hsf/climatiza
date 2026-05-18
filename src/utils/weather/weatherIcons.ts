@@ -6,21 +6,21 @@ import {
   CloudFog,
   CloudLightning,
   Moon,
-} from 'lucide-react'
+} from 'lucide-react';
 
 export function getWeatherIcon(code: number, isDay: boolean) {
   switch (code) {
     case 0:
-      return isDay ? Sun : Moon
+      return isDay ? Sun : Moon;
 
     case 1:
     case 2:
     case 3:
-      return Cloud
+      return Cloud;
 
     case 45:
     case 48:
-      return CloudFog
+      return CloudFog;
 
     case 51:
     case 53:
@@ -28,17 +28,17 @@ export function getWeatherIcon(code: number, isDay: boolean) {
     case 61:
     case 63:
     case 65:
-      return CloudRain
+      return CloudRain;
 
     case 71:
     case 73:
     case 75:
-      return CloudSnow
+      return CloudSnow;
 
     case 95:
-      return CloudLightning
+      return CloudLightning;
 
     default:
-      return Cloud
+      return Cloud;
   }
 }

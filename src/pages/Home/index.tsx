@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import { MapPinIcon, Settings } from "lucide-react"
+import { MapPinIcon, Settings } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -19,26 +19,26 @@ export function Home() {
 
     dispatch(fetchWeatherAsync({
       lat: location.coordinates.lat.toString(),
-      long: location.coordinates.long.toString()
+      long: location.coordinates.long.toString(),
     }));
-  }, [location.status, dispatch, weather.data])
+  }, [location.status, dispatch, weather.data]);
 
   if (weather.status !== 'succeeded' || !weather.data) {
-    return <div>Carregando...</div>
+    return <div>Carregando...</div>;
   }
 
   const currentTime = new Date(weather.data.currentWeather.time);
-  currentTime.setMinutes(0, 0, 0)
+  currentTime.setMinutes(0, 0, 0);
 
   const currentIndex = weather.data.hourly.findIndex(
-    item => item.time.getTime() === currentTime.getTime()
+    item => item.time.getTime() === currentTime.getTime(),
   );
 
   const hourly = currentIndex !== -1
     ? weather.data.hourly.slice(currentIndex + 1, currentIndex + 5)
     : [];
 
-  const CurrentWeatherIcon = getWeatherIcon(weather.data.currentWeather.weatherCode, weather.data.currentWeather.isDay)
+  const CurrentWeatherIcon = getWeatherIcon(weather.data.currentWeather.weatherCode, weather.data.currentWeather.isDay);
 
   return (
     <>

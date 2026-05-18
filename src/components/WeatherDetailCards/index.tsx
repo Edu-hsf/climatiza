@@ -1,6 +1,6 @@
-import type { LucideProps } from "lucide-react"
-import type { ComponentType } from "react"
-import { Card } from "../ui/card"
+import type { LucideProps } from "lucide-react";
+import type { ComponentType } from "react";
+import { Card } from "../ui/card";
 
 interface WeatherDetailCardsProps {
     icon: ComponentType<LucideProps>
@@ -15,5 +15,5 @@ export default function WeatherDetailCards ({icon: Icon, label, data}: WeatherDe
             <p className="text-muted-foreground text-sm mb-1">{label}</p>
             <p className="text-xl">{data}</p>
         </Card>
-    )
+    );
 }
