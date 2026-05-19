@@ -1,5 +1,6 @@
 import { getWeatherDescription } from "@/utils/weather/weatherDescriptions";
 import type { Weather, WeatherAPI } from "./weather.types";
+import { getWeatherIcon } from "@/utils/weather/weatherIcons";
 
 export function weatherMap(raw: WeatherAPI): Weather {
   return {
@@ -15,6 +16,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       weatherDescription: getWeatherDescription(
         raw.current.weather_code,
       ),
+      weatherIcon: getWeatherIcon(raw.current.weather_code, Boolean(raw.current.is_day)),
       isDay: Boolean(raw.current.is_day),
     },
 
@@ -26,6 +28,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       weatherDescription: getWeatherDescription(
         raw.hourly.weather_code[index],
       ),
+      weatherIcon: getWeatherIcon(raw.current.weather_code, true),
     })),
 
     daily: raw.daily.time.map((time, index) => ({
@@ -36,6 +39,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       weatherDescription: getWeatherDescription(
         raw.daily.weather_code[index],
       ),
+      weatherIcon: getWeatherIcon(raw.current.weather_code, true),
     })),
   };
 }

@@ -2,6 +2,8 @@
     WEATHER DA API
 =============================================================== */
 
+import type { LucideIcon } from "lucide-react";
+
 export interface WeatherAPI {
   latitude: number
   longitude: number
@@ -95,6 +97,7 @@ interface CurrentWeather {
   precipitation: number
   weatherCode: number
   weatherDescription: string
+  weatherIcon: LucideIcon
   isDay: boolean
 }
 
@@ -104,6 +107,7 @@ interface HourlyWeather {
   visibility: number
   weatherCode: number
   weatherDescription: string
+  weatherIcon: LucideIcon
 }
 
 interface DailyWeather {
@@ -112,4 +116,5 @@ interface DailyWeather {
   temperatureMin: number
   weatherCode: number
   weatherDescription: string
+  weatherIcon: LucideIcon
 }
