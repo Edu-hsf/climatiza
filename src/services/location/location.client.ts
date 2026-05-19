@@ -1,4 +1,4 @@
-const BASE_URL = 'https://api.mapbox.com'
+const BASE_URL = 'https://api.mapbox.com';
 
 export default async function locationFetch<T>(
   path: string,
@@ -15,13 +15,13 @@ export default async function locationFetch<T>(
         ...options.headers,
       },
     },
-  )
+  );
 
   if (!response.ok) {
     throw new Error(
       'Error in location API request.',
-    )
+    );
   }
 
-  return response.json() as Promise<T>
+  return response.json() as Promise<T>;
 }

@@ -15,8 +15,8 @@ const weatherCodes: Record<number, string> = {
     73: 'neve moderada',
     75: 'neve intensa',
     95: 'tempestade',
-}
+};
 
 export function getWeatherDescription(code: number): string {
-    return weatherCodes[code] || 'desconhecido'
+    return weatherCodes[code] || 'desconhecido';
 }

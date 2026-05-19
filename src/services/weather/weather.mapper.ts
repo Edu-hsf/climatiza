@@ -13,7 +13,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       precipitation: raw.current.precipitation,
       weatherCode: raw.current.weather_code,
       weatherDescription: getWeatherDescription(
-        raw.current.weather_code
+        raw.current.weather_code,
       ),
       isDay: Boolean(raw.current.is_day),
     },
@@ -24,7 +24,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       visibility: raw.hourly.visibility[index],
       weatherCode: raw.hourly.weather_code[index],
       weatherDescription: getWeatherDescription(
-        raw.hourly.weather_code[index]
+        raw.hourly.weather_code[index],
       ),
     })),
 
@@ -34,8 +34,8 @@ export function weatherMap(raw: WeatherAPI): Weather {
       temperatureMin: raw.daily.temperature_2m_min[index],
       weatherCode: raw.daily.weather_code[index],
       weatherDescription: getWeatherDescription(
-        raw.daily.weather_code[index]
+        raw.daily.weather_code[index],
       ),
     })),
-  }
+  };
 }

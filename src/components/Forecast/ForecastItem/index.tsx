@@ -1,5 +1,4 @@
-import { type LucideProps } from "lucide-react"
-import type { ComponentType, ForwardRefExoticComponent } from "react"
+import { type LucideProps } from "lucide-react";
 
 interface ForecastItemProps {
     time?: string
@@ -28,5 +27,5 @@ export default function ForecastItem ({ time, icon: Icon, temperature }: Forecas
             </div>
             <p className="text-2xl">{temperature}</p>
         </div>
-    )
+    );
 }

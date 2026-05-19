@@ -1,26 +1,26 @@
-import { CloudRain, CloudRainWind, CloudSunRain, CloudSun } from "lucide-react"
-import ForecastItem from "./ForecastItem"
+import { CloudRain, CloudRainWind, CloudSunRain, CloudSun } from "lucide-react";
+import ForecastItem from "./ForecastItem";
 
 export default function Forecast() {
     const weatherArray = [
         {
             time: '11:59',
             icon: CloudRain,
-            temperature: '29°C'
+            temperature: '29°C',
         }, {
             time: '12:59',
             icon: CloudRainWind,
-            temperature: '28°C'
+            temperature: '28°C',
         }, {
             time: '13:59',
             icon: CloudSunRain,
-            temperature: '28°C'
+            temperature: '28°C',
         }, {
             time: '14:59',
             icon: CloudSun,
-            temperature: '26°C'
+            temperature: '26°C',
         },
-    ]
+    ];
 
     return (
         <div className="w-full max-w-4xl">
@@ -38,5 +38,5 @@ export default function Forecast() {
                 ))}
             </div>
         </div>
-    )
+    );
 } 

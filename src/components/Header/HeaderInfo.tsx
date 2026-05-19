@@ -1,4 +1,4 @@
-import type { ReactNode } from "react"
+import type { ReactNode } from "react";
 
 interface HeaderInfoProps {
     children: ReactNode
@@ -14,5 +14,5 @@ export default function HeaderInfo ({ children }: HeaderInfoProps) {
         ">
             { children }
         </div>
-    )
+    );
 }

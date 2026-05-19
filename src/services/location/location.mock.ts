@@ -1,4 +1,4 @@
-import { type LocationAPI } from './location.types'
+import { type LocationAPI } from './location.types';
 
 export const reverseMock: LocationAPI = {
   type: 'FeatureCollection',
@@ -56,7 +56,7 @@ export const reverseMock: LocationAPI = {
   ],
 
   attribution: 'mock',
-}
+};
 
 export const searchMock: LocationAPI = {
   type: 'FeatureCollection',
@@ -165,4 +165,4 @@ export const searchMock: LocationAPI = {
   ],
 
   attribution: 'mock',
-}
+};

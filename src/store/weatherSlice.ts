@@ -1,6 +1,6 @@
 import getOpenMeteoAPI from '@/services/weather/weather.client';
 import WeatherData from '@/utils/weather/weatherData';
-import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 export interface WeatherState {
     status: 'idle' | 'loading' | 'succeeded' | 'failed'
@@ -14,8 +14,8 @@ interface FetchWeatherPayload {
 
 const initialState: WeatherState = {
     status: 'idle',
-    data: null
-}
+    data: null,
+};
 
 export const fetchWeatherAsync = createAsyncThunk<WeatherData, FetchWeatherPayload>(
     'weather/fetchWeatherAsync',
@@ -23,7 +23,7 @@ export const fetchWeatherAsync = createAsyncThunk<WeatherData, FetchWeatherPaylo
         const data = await getOpenMeteoAPI(coordinates.lat, coordinates.long);  
         
         return new WeatherData(data);
-    }
+    },
 );
 
 export const weatherSlice = createSlice({
@@ -35,22 +35,22 @@ export const weatherSlice = createSlice({
         },
         clearWeather: (state) => {
             state.data = null;
-        }
+        },
     },
     extraReducers: builder => {
         builder
             .addCase(fetchWeatherAsync.pending, state => {
-                state.status = 'loading'
+                state.status = 'loading';
             })
             .addCase(fetchWeatherAsync.fulfilled, (state, action) => {
-                state.status = 'succeeded'
+                state.status = 'succeeded';
                 state.data = action.payload;
             })
             .addCase(fetchWeatherAsync.rejected, state => {
-                state.status = 'failed'
-            })
-    }
-})
+                state.status = 'failed';
+            });
+    },
+});
 
-export const { setWeather, clearWeather } = weatherSlice.actions
-export default weatherSlice.reducer
+export const { setWeather, clearWeather } = weatherSlice.actions;
+export default weatherSlice.reducer;
