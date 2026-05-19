@@ -1,44 +1,11 @@
 import { Header } from "@/components/Header";
 import { MapPinIcon, Settings } from "lucide-react";
-import { useAppDispatch, useAppSelector } from "@/hooks";
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import ForecastItem from "@/components/Forecast/ForecastItem";
-import { useEffect } from "react";
-import getWeatherIcon from "@/components/WeatherIcons";
-import { fetchWeatherAsync } from "@/store/weatherSlice";
+import { useWeather } from "@/hooks/weather/useWeather";
 
 export function Home() {
-  const dispatch = useAppDispatch();
-  const location = useAppSelector(state => state.location);
-  const weather = useAppSelector(state => state.weather);
-
-  useEffect(() => {
-    if (location.status !== 'succeeded') return;
-    if (weather.data) return; // Se já tem dados, não recarrega
-
-    dispatch(fetchWeatherAsync({
-      lat: location.coordinates.lat.toString(),
-      long: location.coordinates.long.toString(),
-    }));
-  }, [location.status, dispatch, weather.data]);
-
-  if (weather.status !== 'succeeded' || !weather.data) {
-    return <div>Carregando...</div>;
-  }
-
-  const currentTime = new Date(weather.data.currentWeather.time);
-  currentTime.setMinutes(0, 0, 0);
-
-  const currentIndex = weather.data.hourly.findIndex(
-    item => item.time.getTime() === currentTime.getTime(),
-  );
-
-  const hourly = currentIndex !== -1
-    ? weather.data.hourly.slice(currentIndex + 1, currentIndex + 5)
-    : [];
-
-  const CurrentWeatherIcon = getWeatherIcon(weather.data.currentWeather.weatherCode, weather.data.currentWeather.isDay);
+  const { data, isLoading, isError } = useWeather();
 
   return (
     <>

@@ -1,12 +1,12 @@
 import { type LucideProps } from "lucide-react";
 
-interface ForecastItemProps {
+interface ForecastCardProps {
     time?: string
     icon?: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>
     temperature?: string
 }
 
-export default function ForecastItem ({ time, icon: Icon, temperature }: ForecastItemProps ){
+export default function ForecastCard ({ time, icon: Icon, temperature }: ForecastCardProps ){
     return (
         <div className="
             flex 
