@@ -15,7 +15,7 @@ export default function ForecastSkeleton() {
         "
       >
         {Array.from({ length: 4 }).map((_, index) => (
-          <Card>
+          <Card key={index}>
             <CardContent className="flex flex-col items-center gap-3">
               <Skeleton className="h-4 w-12" />
 
