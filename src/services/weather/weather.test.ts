@@ -8,7 +8,7 @@ vi.mock('./weather.client');
 describe('getWeather', () => {
     it('Deve retornar os dados climáticos formatados corretamente', async () => {
         vi.mocked(weatherFetch).mockResolvedValue(weatherMock);
-        const data = await getWeather('-16', '-48');
+        const data = await getWeather(-16, -48);
 
         expect(data.current.weatherDescription).toBe('parcialmente nublado');
         expect(data.current.isDay).toBe(true);

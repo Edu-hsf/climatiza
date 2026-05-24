@@ -23,7 +23,7 @@ describe('useLocation', () => {
   it('deve buscar localização com coordenadas válidas', async () => {
     mockedCoords.mockResolvedValue({ city: 'Brasília' });
 
-    const wrapper = createWrapper();
+    const wrapper = createWrapper({ lat: 10, long: -20 });
 
     const { result } = renderHook(
       () => useLocation(),
@@ -62,7 +62,7 @@ describe('useLocationSearch', () => {
       { city: 'Goiânia' },
     ]);
 
-    const wrapper = createWrapper();
+    const wrapper = createWrapper({ lat: 10, long: -20 });
 
     const { result } = renderHook(
       () => useLocationSearch('bra'),
@@ -78,7 +78,7 @@ describe('useLocationSearch', () => {
   });
 
   it('não deve executar search com menos de 3 caracteres', () => {
-    const wrapper = createWrapper();
+    const wrapper = createWrapper({ lat: 10, long: -20 });
 
     const { result } = renderHook(
       () => useLocationSearch('ab'),
@@ -90,7 +90,7 @@ describe('useLocationSearch', () => {
   });
 
   it('deve ignorar espaços na validação do search', () => {
-    const wrapper = createWrapper();
+    const wrapper = createWrapper({ lat: 10, long: -20 });
 
     renderHook(
       () => useLocationSearch('   '),

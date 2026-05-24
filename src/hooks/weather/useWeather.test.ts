@@ -11,10 +11,10 @@ const mockedGetWeather = getWeather as unknown as ReturnType<typeof vi.fn>;
 
 describe('useWeather', () => {
     it('não deve buscar quando não há latitude/longitude', async () => {
-        const wrapper = createWrapper();
+        const wrapper = createWrapper(null);
 
         const { result } = renderHook(
-            () => useWeather(undefined, undefined),
+            () => useWeather(),
             { wrapper },
         );
 
@@ -27,10 +27,10 @@ describe('useWeather', () => {
             temp: 25,
         });
 
-        const wrapper = createWrapper();
+        const wrapper = createWrapper({ lat: 10, long: -20 });
 
         const { result } = renderHook(
-            () => useWeather('10', '-20'),
+            () => useWeather(),
             { wrapper },
         );
 
@@ -38,17 +38,17 @@ describe('useWeather', () => {
             expect(result.current.isSuccess).toBe(true);
         });
 
-        expect(mockedGetWeather).toHaveBeenCalledWith('10', '-20');
+        expect(mockedGetWeather).toHaveBeenCalledWith(10, -20);
         expect(result.current.data).toEqual({ temp: 25 });
     });
 
     it('deve manter configuração do query corretamente', async () => {
         mockedGetWeather.mockResolvedValue({ temp: 30 });
 
-        const wrapper = createWrapper();
+        const wrapper = createWrapper({ lat: 10, long: -20 });
 
         const { result } = renderHook(
-            () => useWeather('10', '-20'),
+            () => useWeather(),
             { wrapper },
         );
 
@@ -59,7 +59,7 @@ describe('useWeather', () => {
         // valida comportamento real (cache evita refetch imediato)
         const firstCallCount = mockedGetWeather.mock.calls.length;
 
-        renderHook(() => useWeather('10', '-20'), { wrapper });
+        renderHook(() => useWeather(), { wrapper });
 
         expect(mockedGetWeather.mock.calls.length).toBe(firstCallCount);
     });
