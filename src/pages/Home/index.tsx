@@ -30,13 +30,13 @@ export function Home() {
         <div className="flex flex-col items-center">
           {isLoading ? (
             <>
-              <Skeleton className="w-20 h-20 rounded-full" />
-              <Skeleton className="h-20 w-52 mb-4" />
+              <Skeleton className="w-30 h-30 rounded-full mb-8" />
+              <Skeleton className="h-20 w-52 mb-6" />
               <Skeleton className="h-8 w-40" />
             </>
           ) : (
             <>
-              <div className="glass w-fit h-fit p-6 rounded-full mb-6">
+              <div className="bg-white/10 w-fit h-fit p-6 rounded-full mb-6">
                 {WeatherIcon && <WeatherIcon size={80} />}
               </div>
 

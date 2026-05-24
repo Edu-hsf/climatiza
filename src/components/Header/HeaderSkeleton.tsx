@@ -6,10 +6,10 @@ export default function HeaderSkeleton() {
     return (
         <div className="flex flex-row justify-between p-8">
             <div className="flex items-center text-lg gap-2">
-                <MapPinIcon size={20} className="hidden" />
-                <Skeleton className="h-4 w-32" />
+                <MapPinIcon size={20}/>
+                <Skeleton className="h-5.5 w-32" />
             </div>
-            <Button variant="glass" size="icon" className="hidden">
+            <Button variant="glass" size="icon">
                 <Settings size={24} />
             </Button>
         </div>

@@ -1,5 +1,6 @@
 import { toTimeFormat } from "@/utils/formatter";
 import { type LucideProps } from "lucide-react";
+import { Card, CardContent } from "../ui/card";
 
 interface ForecastCardProps {
     time?: Date | string
@@ -7,26 +8,18 @@ interface ForecastCardProps {
     temperature?: number
 }
 
-export default function ForecastCard ({ time, icon: Icon, temperature }: ForecastCardProps ){
+export default function ForecastCard({ time, icon: Icon, temperature }: ForecastCardProps) {
     return (
-        <div className="
-            flex 
-            flex-col 
-            glass-border 
-            rounded-2xl 
-            p-6
-            gap-3 
-            text-center
-            hover:opacity-80
-            transition-opacity
-        ">
-            <p className="text-muted-foreground">
-                {time && toTimeFormat(time)}
-            </p>
-            <div className="flex justify-center">
-                {Icon ? <Icon size={32}/> : ''}
-            </div>
-            <p className="text-2xl">{temperature}°C</p>
-        </div>
+        <Card>
+            <CardContent className="flex flex-col items-center gap-3">
+                <p className="text-muted-foreground">
+                    {time && toTimeFormat(time)}
+                </p>
+                <div className="flex justify-center">
+                    {Icon ? <Icon size={40} /> : ''}
+                </div>
+                <p className="text-2xl">{temperature}°C</p>
+            </CardContent>
+        </Card>
     );
 }

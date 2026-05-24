@@ -1,4 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton';
+import { Card, CardContent } from '../ui/card';
 
 export default function ForecastSkeleton() {
   return (
@@ -14,24 +15,15 @@ export default function ForecastSkeleton() {
         "
       >
         {Array.from({ length: 4 }).map((_, index) => (
-          <div
-            key={index}
-            className="
-              rounded-2xl
-              border
-              p-4
-              flex
-              flex-col
-              items-center
-              gap-4
-            "
-          >
-            <Skeleton className="h-4 w-12" />
+          <Card>
+            <CardContent className="flex flex-col items-center gap-3">
+              <Skeleton className="h-4 w-12" />
 
-            <Skeleton className="h-10 w-10 rounded-full" />
+              <Skeleton className="h-10 w-10 rounded-full" />
 
-            <Skeleton className="h-6 w-16" />
-          </div>
+              <Skeleton className="h-6 w-16" />
+            </CardContent>
+          </Card>
         ))}
       </div>
     </div>
