@@ -1,3 +1,4 @@
+import { CoordinatesContext } from '@/contexts/CoordinatesContext';
 import {
   QueryClient,
   QueryClientProvider,
@@ -13,7 +14,10 @@ export function createTestQueryClient() {
   });
 }
 
-export function createWrapper() {
+export function createWrapper(coordinates: { lat: number, long: number } | null = {
+  lat: 10,
+  long: -20,
+}) {
   const queryClient = createTestQueryClient();
 
   return function Wrapper({
@@ -23,7 +27,9 @@ export function createWrapper() {
   }) {
     return (
       <QueryClientProvider client={queryClient}>
-        {children}
+        <CoordinatesContext.Provider value={{ coordinates, setCoordinates: vi.fn() }}>
+          {children}
+        </CoordinatesContext.Provider>
       </QueryClientProvider>
     );
   };
