@@ -23,6 +23,8 @@ export function useLocation() {
     enabled: !!coordinates,
 
     staleTime: 1000 * 60 * 10,
+
+    refetchOnWindowFocus: false,
   });
 }
 
