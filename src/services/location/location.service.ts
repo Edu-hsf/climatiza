@@ -5,8 +5,8 @@
   const token = import.meta.env.VITE_MAPBOX_TOKEN;
 
   export async function getLocationByCoordinates(
-    latitude: string,
-    longitude: string,
+    latitude: number,
+    longitude: number,
   ) {
     const response =
       await locationFetch<LocationAPI>(`/search/searchbox/v1/reverse?longitude=${longitude}&latitude=${latitude}&access_token=${token}&language=pt-BR&limit=1&types=country,place`);
