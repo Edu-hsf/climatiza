@@ -26,7 +26,7 @@ describe('useLocation', () => {
     const wrapper = createWrapper();
 
     const { result } = renderHook(
-      () => useLocation('10', '-20'),
+      () => useLocation(),
       { wrapper },  
     );
 
@@ -34,15 +34,15 @@ describe('useLocation', () => {
       expect(result.current.isSuccess).toBe(true);
     });
 
-    expect(mockedCoords).toHaveBeenCalledWith('10', '-20');
+    expect(mockedCoords).toHaveBeenCalledWith(10, -20);
     expect(result.current.data).toEqual({ city: 'Brasília' });
   });
 
   it('não deve executar query se faltar latitude ou longitude', async () => {
-    const wrapper = createWrapper();
+    const wrapper = createWrapper(null);
 
     const { result } = renderHook(
-      () => useLocation('', ''),
+      () => useLocation(),
       { wrapper },
     );
 
