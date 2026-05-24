@@ -20,15 +20,15 @@ createRoot(
   document.getElementById('root')!,
 ).render(
   <StrictMode>
-    <CoordinatesProvider>
-      <QueryClientProvider client={queryClient} >
+    <QueryClientProvider client={queryClient} >
+      <CoordinatesProvider>
 
         <App />
 
         {import.meta.env.DEV && (
           <ReactQueryDevtools initialIsOpen={false} />
         )}
-      </QueryClientProvider>
-    </CoordinatesProvider>
+      </CoordinatesProvider>
+    </QueryClientProvider>
   </StrictMode>,
 );
