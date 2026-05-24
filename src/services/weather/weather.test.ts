@@ -10,7 +10,7 @@ describe('getWeather', () => {
         vi.mocked(weatherFetch).mockResolvedValue(weatherMock);
         const data = await getWeather(-16, -48);
 
-        expect(data.current.weatherDescription).toBe('parcialmente nublado');
+        expect(data.current.weatherDescription).toBe('Parcialmente nublado');
         expect(data.current.isDay).toBe(true);
         expect(data.hourly.length).toBeGreaterThan(0);
         expect(data.daily.length).toBeGreaterThan(0);
@@ -23,7 +23,7 @@ describe('weatherMapper', () => {
     it('Deve formatar corretamente os dados atuais do clima', () => {
         expect(data.current.time.toLocaleDateString('pt-BR')).toBe('17/05/2026');
         expect(data.current.weatherCode).toBe(2);
-        expect(data.current.weatherDescription).toBe('parcialmente nublado');
+        expect(data.current.weatherDescription).toBe('Parcialmente nublado');
         expect(data.current.isDay).toBe(true);
     });
 
