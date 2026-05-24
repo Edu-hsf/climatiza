@@ -28,7 +28,11 @@ export function weatherMap(raw: WeatherAPI): Weather {
       temperature: Number(raw.hourly.temperature_2m[index].toFixed()),
       weatherCode: raw.hourly.weather_code[index],
       weatherDescription: getWeatherDescription(raw.hourly.weather_code[index]),
-      weatherIcon: getWeatherIcon(raw.current.weather_code, true),
+      weatherIcon: getWeatherIcon(
+        raw.hourly.weather_code[index],
+        new Date(time).getHours() >= 6 &&
+        new Date(time).getHours() < 19,
+      ),
     })),
 
     daily: raw.daily.time.map((time, index) => ({
@@ -37,7 +41,11 @@ export function weatherMap(raw: WeatherAPI): Weather {
       temperatureMin: Number(raw.daily.temperature_2m_min[index].toFixed()),
       weatherCode: raw.daily.weather_code[index],
       weatherDescription: getWeatherDescription(raw.daily.weather_code[index]),
-      weatherIcon: getWeatherIcon(raw.current.weather_code, true),
+      weatherIcon: getWeatherIcon(
+        raw.hourly.weather_code[index],
+        new Date(time).getHours() >= 6 &&
+        new Date(time).getHours() < 19,
+      ),
     })),
   };
 }
