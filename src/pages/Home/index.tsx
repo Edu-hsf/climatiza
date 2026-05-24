@@ -6,6 +6,7 @@ import { useWeather } from "@/hooks/weather/useWeather";
 import { useLocation } from "@/hooks/location/useLocation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Forecast } from "@/components/Forecast";
+import { getNextHours } from "@/utils/weather/getNextHours";
 
 export function Home() {
   const location = useLocation();
@@ -13,6 +14,7 @@ export function Home() {
   const navigate = useNavigate();
   const WeatherIcon = weather.data?.current.weatherIcon;
   const isLoading = weather.isLoading || location.isLoading;
+  const nextHours = weather.data && getNextHours(weather.data?.hourly);
 
   return (
     <>
@@ -51,7 +53,7 @@ export function Home() {
 
         {isLoading ? <Forecast.Skeleton /> : (
           <Forecast.Root>
-            {weather.data?.hourly.map((item, i) => (
+            {nextHours?.map((item, i) => (
               <Forecast.Card
                 key={i}
                 time={item.time}
@@ -62,7 +64,7 @@ export function Home() {
           </Forecast.Root>
         )}
 
-        {isLoading && (
+        {!isLoading && (
           <Button size="lg" onClick={() => navigate('/detailed-forecast')}>
             Ver Previsão Detalhada
           </Button>
