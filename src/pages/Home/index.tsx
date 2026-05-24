@@ -1,6 +1,6 @@
 import { Header } from "@/components/Header";
 import { Settings } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useWeather } from "@/hooks/weather/useWeather";
 import { useLocation } from "@/hooks/location/useLocation";
@@ -10,6 +10,7 @@ import { Forecast } from "@/components/Forecast";
 export function Home() {
   const location = useLocation();
   const weather = useWeather();
+  const navigate = useNavigate();
   const WeatherIcon = weather.data?.current.weatherIcon;
   const isLoading = weather.isLoading || location.isLoading;
 
@@ -18,11 +19,9 @@ export function Home() {
       {isLoading ? <Header.Skeleton /> : (
         <Header.Root>
           <Header.Info city={location.data?.city} country={location.data?.country} />
-          <NavLink to='settings'>
-            <Header.Button>
-              <Settings size={24} />
-            </Header.Button>
-          </NavLink>
+          <Header.Button onClick={() => navigate('/settings')}>
+            <Settings size={24} />
+          </Header.Button>
         </Header.Root>
       )}
       <main className="px-6 py-20 h-full flex flex-col items-center gap-12">
@@ -64,11 +63,9 @@ export function Home() {
         )}
 
         {isLoading && (
-          <NavLink to={'detailedforecast'}>
-            <Button size="lg">
-              Ver Previsão Detalhada
-            </Button>
-          </NavLink>
+          <Button size="lg" onClick={() => navigate('/detailed-forecast')}>
+            Ver Previsão Detalhada
+          </Button>
         )}
       </main>
     </>
