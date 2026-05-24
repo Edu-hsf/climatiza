@@ -1,9 +1,10 @@
+import { toTimeFormat } from "@/utils/formatter";
 import { type LucideProps } from "lucide-react";
 
 interface ForecastCardProps {
-    time?: string
+    time?: Date | string
     icon?: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>
-    temperature?: string
+    temperature?: number
 }
 
 export default function ForecastCard ({ time, icon: Icon, temperature }: ForecastCardProps ){
@@ -20,12 +21,12 @@ export default function ForecastCard ({ time, icon: Icon, temperature }: Forecas
             transition-opacity
         ">
             <p className="text-muted-foreground">
-                {time}
+                {time && toTimeFormat(time)}
             </p>
             <div className="flex justify-center">
                 {Icon ? <Icon size={32}/> : ''}
             </div>
-            <p className="text-2xl">{temperature}</p>
+            <p className="text-2xl">{temperature}°C</p>
         </div>
     );
 }

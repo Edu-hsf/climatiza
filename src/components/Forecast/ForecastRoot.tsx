@@ -1,15 +1,8 @@
-import type { LucideIcon } from "lucide-react";
-import ForecastCard from "./ForecastCard";
+interface ForecastRootProps {
+  children: React.ReactNode
+}
 
-type ForecastProps = {
-  items: {
-    time: string;
-    icon: LucideIcon;
-    temperature: string;
-  }[];
-};
-
-export default function ForecastRoot({ items }: ForecastProps) {
+export default function ForecastRoot({ children }: ForecastRootProps) {
   return (
     <div className="w-full max-w-4xl">
       <h2 className="text-xl px-2 mb-4">
@@ -25,14 +18,7 @@ export default function ForecastRoot({ items }: ForecastProps) {
           gap-4
         "
       >
-        {items.map((item) => (
-          <ForecastCard
-            key={item.time}
-            time={item.time}
-            icon={item.icon}
-            temperature={item.temperature}
-          />
-        ))}
+        { children }
       </div>
     </div>
   );
