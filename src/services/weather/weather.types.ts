@@ -95,6 +95,7 @@ export interface CurrentWeather {
   humidity: number
   pressure: number
   precipitation: number
+  visibility: number
   weatherCode: number
   weatherDescription: string
   weatherIcon: LucideIcon
@@ -104,7 +105,6 @@ export interface CurrentWeather {
 export interface HourlyWeather {
   time: Date
   temperature: number
-  visibility: number
   weatherCode: number
   weatherDescription: string
   weatherIcon: LucideIcon

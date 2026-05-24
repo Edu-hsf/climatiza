@@ -3,6 +3,10 @@ import type { Weather, WeatherAPI } from "./weather.types";
 import { getWeatherIcon } from "@/utils/weather/weatherIcons";
 
 export function weatherMap(raw: WeatherAPI): Weather {
+  const currentIndex = raw.hourly.time.findIndex(
+    (time) => time === raw.current.time,
+  );
+
   return {
     current: {
       time: new Date(raw.current.time),
@@ -12,6 +16,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       humidity: raw.current.relative_humidity_2m,
       pressure: raw.current.pressure_msl,
       precipitation: raw.current.precipitation,
+      visibility: raw.hourly.visibility[currentIndex],
       weatherCode: raw.current.weather_code,
       weatherDescription: getWeatherDescription(
         raw.current.weather_code,
@@ -20,10 +25,9 @@ export function weatherMap(raw: WeatherAPI): Weather {
       isDay: Boolean(raw.current.is_day),
     },
 
-    hourly: raw.hourly.time.map((time, index) => ({ 
+    hourly: raw.hourly.time.map((time, index) => ({
       time: new Date(time),
       temperature: raw.hourly.temperature_2m[index],
-      visibility: raw.hourly.visibility[index],
       weatherCode: raw.hourly.weather_code[index],
       weatherDescription: getWeatherDescription(
         raw.hourly.weather_code[index],
