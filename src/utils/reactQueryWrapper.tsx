@@ -14,10 +14,7 @@ export function createTestQueryClient() {
   });
 }
 
-export function createWrapper(coordinates: { lat: number, long: number } | null = {
-  lat: 10,
-  long: -20,
-}) {
+export function createWrapper(coordinates: { lat: number, long: number } | null) {
   const queryClient = createTestQueryClient();
 
   return function Wrapper({
