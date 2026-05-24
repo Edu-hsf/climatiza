@@ -1,59 +1,75 @@
 import { Header } from "@/components/Header";
-import { MapPinIcon, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useWeather } from "@/hooks/weather/useWeather";
+import { useLocation } from "@/hooks/location/useLocation";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Forecast } from "@/components/Forecast";
 
 export function Home() {
-  const { data, isLoading, isError } = useWeather();
+  const location = useLocation();
+  const weather = useWeather();
+  const WeatherIcon = weather.data?.current.weatherIcon;
+  const isLoading = weather.isLoading || location.isLoading;
 
   return (
     <>
-      <Header.Root>
-        <Header.Info>
-          <MapPinIcon size={20} />
-          {location.city}, {location.country}
-        </Header.Info>
-        <NavLink to='settings'>
-          <Header.HeaderButton>
-            <Settings size={24} />
-          </Header.HeaderButton>
-        </NavLink>
-      </Header.Root>
+      {isLoading ? <Header.Skeleton /> : (
+        <Header.Root>
+          <Header.Info city={location.data?.city} country={location.data?.country} />
+          <NavLink to='settings'>
+            <Header.Button>
+              <Settings size={24} />
+            </Header.Button>
+          </NavLink>
+        </Header.Root>
+      )}
       <main className="px-6 py-20 h-full flex flex-col items-center gap-12">
         <div className="flex flex-col items-center">
-          <div className="glass w-fit h-fit p-6 rounded-full mb-6">
-            {CurrentWeatherIcon && <CurrentWeatherIcon size={80} />}
-          </div>
+          {isLoading ? (
+            <>
+              <Skeleton className="w-20 h-20 rounded-full" />
+              <Skeleton className="h-20 w-52 mb-4" />
+              <Skeleton className="h-8 w-40" />
+            </>
+          ) : (
+            <>
+              <div className="glass w-fit h-fit p-6 rounded-full mb-6">
+                {WeatherIcon && <WeatherIcon size={80} />}
+              </div>
 
-          <h1 className="text-7xl md:text-8xl mb-4">
-            {`${weather.data.currentWeather.temperature}°C`}
-          </h1>
+              <h1 className="text-7xl md:text-8xl mb-4">
+                {`${weather.data?.current.temperature}°C`}
+              </h1>
 
-          <p className="text-2xl">
-            {weather.data.currentWeather.weatherDescription}
-          </p>
+              <p className="text-2xl">
+                {weather.data?.current.weatherDescription}
+              </p>
+            </>
+          )}
         </div>
-        <div className="w-full max-w-4xl">
-          <h2 className="text-xl px-2 mb-4">Previsão horária</h2>
-          <div
-            data-testid="forecast-grid"
-            className="grid grid-cols-2 md:grid-cols-4 gap-4"
-          >
-            {hourly.map((item) => (
-              <ForecastItem
-                time={item.time.toLocaleTimeString().slice(0, 5)}
-                icon={getWeatherIcon(item.weatherCode, item.isDay)}
-                temperature={item.temperature.toString() + '°C'}
+
+        {isLoading ? <Forecast.Skeleton /> : (
+          <Forecast.Root>
+            {weather.data?.hourly.map((item, i) => (
+              <Forecast.Card
+                key={i}
+                time={item.time}
+                icon={item.weatherIcon}
+                temperature={item.temperature}
               />
             ))}
-          </div>
-        </div>
-        <NavLink to={'detailedforecast'}>
-          <Button size="lg">
-            Ver Previsão Detalhada
-          </Button>
-        </NavLink>
+          </Forecast.Root>
+        )}
+
+        {isLoading && (
+          <NavLink to={'detailedforecast'}>
+            <Button size="lg">
+              Ver Previsão Detalhada
+            </Button>
+          </NavLink>
+        )}
       </main>
     </>
   );
