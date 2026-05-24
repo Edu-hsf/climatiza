@@ -87,7 +87,7 @@ export interface Weather {
   daily: DailyWeather[]
 }
 
-interface CurrentWeather {
+export interface CurrentWeather {
   time: Date
   temperature: number
   apparentTemperature: number
@@ -101,7 +101,7 @@ interface CurrentWeather {
   isDay: boolean
 }
 
-interface HourlyWeather {
+export interface HourlyWeather {
   time: Date
   temperature: number
   visibility: number
@@ -110,7 +110,7 @@ interface HourlyWeather {
   weatherIcon: LucideIcon
 }
 
-interface DailyWeather {
+export interface DailyWeather {
   time: Date
   temperatureMax: number
   temperatureMin: number
