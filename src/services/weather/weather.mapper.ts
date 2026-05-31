@@ -7,8 +7,31 @@ export function weatherMap(raw: WeatherAPI): Weather {
     (time) => time === raw.current.time,
   );
 
+  const getAverageHumidity = (arr: number[]) => {
+    let some = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+      some += arr[i];
+    }
+
+    return some / arr.length;
+  };
+
   return {
     current: {
+      units: {
+        time: raw.current_units.time,
+        temperature: raw.current_units.temperature_2m,
+        apparentTemperature: raw.current_units.apparent_temperature,
+        windSpeed: raw.current_units.wind_speed_10m,
+        humidity: raw.current_units.relative_humidity_2m,
+        pressure: raw.current_units.pressure_msl,
+        precipitation: raw.current_units.precipitation,
+        visibility: raw.hourly_units.visibility,
+        weatherCode: raw.current_units.weather_code,
+        interval: raw.current_units.interval,
+        isDay: raw.current_units.is_day,
+      },
       time: new Date(raw.current.time),
       temperature: Number(raw.current.temperature_2m.toFixed()),
       apparentTemperature: Number(raw.current.apparent_temperature.toFixed()),
@@ -24,6 +47,11 @@ export function weatherMap(raw: WeatherAPI): Weather {
     },
 
     hourly: raw.hourly.time.map((time, index) => ({
+      units: {
+        time: raw.hourly_units.time,
+        temperature: raw.hourly_units.temperature_2m,
+        weatherCode: raw.hourly_units.weather_code,
+      },
       time: new Date(time + ":00-03:00"),
       temperature: Number(raw.hourly.temperature_2m[index].toFixed()),
       weatherCode: raw.hourly.weather_code[index],
@@ -36,9 +64,17 @@ export function weatherMap(raw: WeatherAPI): Weather {
     })),
 
     daily: raw.daily.time.map((time, index) => ({
+      units: {
+        time: raw.daily_units.time,
+        temperatureMax: raw.daily_units.temperature_2m_max,
+        temperatureMin: raw.daily_units.temperature_2m_min,
+        humidity: raw.hourly_units.relative_humidity_2m,
+        weatherCode: raw.daily_units.weather_code,
+      },
       time: new Date(time + "T12:00:00-03:00"),
       temperatureMax: Number(raw.daily.temperature_2m_max[index].toFixed()),
       temperatureMin: Number(raw.daily.temperature_2m_min[index].toFixed()),
+      humidity: getAverageHumidity(raw.hourly.relative_humidity_2m.slice(index * 24, index * 24 + 24)),
       weatherCode: raw.daily.weather_code[index],
       weatherDescription: getWeatherDescription(raw.daily.weather_code[index]),
       weatherIcon: getWeatherIcon(raw.daily.weather_code[index], true),
