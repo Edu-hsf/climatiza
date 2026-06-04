@@ -1,3 +1,4 @@
+import { ErrorState } from "@/components/ErrorState";
 import { Header } from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,12 +21,13 @@ export function Settings() {
   const [unitFocused, setUnitFocused] = useState<number | undefined>();
 
   const isLoading = !locationCoordinates.data || !locationSearch.data;
+  const isError = weather.isError || location.isError;
 
   useEffect(() => {
     if (locationCoordinates.data?.city) {
       setSearch(`${locationCoordinates.data.city} ${locationCoordinates.data.state}`);
     }
-    
+
     setCityFocused(locationCoordinates.data?.id);
   }, [locationCoordinates.data]);
 
@@ -44,6 +46,10 @@ export function Settings() {
   const handleUnitClick = (id: number) => {
     console.log(id);
   };
+
+  if (isError) return (
+    <ErrorState title="Algo deu errado" description="Não foi possível carregar os dados no momento" />
+  );
 
   return (
     <>

@@ -15,12 +15,14 @@ import { ChartContainer, ChartTooltip } from "@/components/ui/chart";
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
+import { ErrorState } from "@/components/ErrorState";
 
 export function DetailedForecast() {
   const location = useLocation();
   const weather = useWeather();
   const navigate = useNavigate();
   const isLoading = location.isLoading || weather.isLoading;
+  const isError = weather.isError || location.isError;
   const CurrentWeatherIcon = weather.data?.current.weatherIcon;
 
   const chartData = useMemo(() => {
@@ -40,6 +42,10 @@ export function DetailedForecast() {
       color: 'var(--accent)',
     },
   };
+
+  if (isError) return (
+    <ErrorState title="Algo deu errado" description="Não foi possível carregar os dados no momento" />
+  );
 
   return (
     <>

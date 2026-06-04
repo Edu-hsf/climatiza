@@ -7,6 +7,7 @@ import { useLocation } from "@/hooks/location/useLocation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Forecast } from "@/components/Forecast";
 import { getNextHours } from "@/utils/weather/getNextHours";
+import { ErrorState } from "@/components/ErrorState";
 
 export function Home() {
   const location = useLocation();
@@ -14,7 +15,12 @@ export function Home() {
   const navigate = useNavigate();
   const WeatherIcon = weather.data?.current.weatherIcon;
   const isLoading = weather.isLoading || location.isLoading;
+  const isError = weather.isError || location.isError;
   const nextHours = weather.data && getNextHours(weather.data?.hourly);
+
+  if (isError) return (
+    <ErrorState title="Algo deu errado" description="Não foi possível carregar os dados no momento"/>
+  );
 
   return (
     <>
