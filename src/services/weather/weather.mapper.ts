@@ -3,9 +3,18 @@ import type { Weather, WeatherAPI } from "./weather.types";
 import { getWeatherIcon } from "@/utils/weather/weatherIcons";
 
 export function weatherMap(raw: WeatherAPI): Weather {
-  const currentIndex = raw.hourly.time.findIndex(
-    (time) => time === raw.current.time,
-  );
+  const currentDate = new Date(raw.current.time);
+
+  const currentIndex = raw.hourly.time.findIndex((time) => {
+    const hourlyDate = new Date(time);
+
+    return (
+      hourlyDate.getFullYear() === currentDate.getFullYear() &&
+      hourlyDate.getMonth() === currentDate.getMonth() &&
+      hourlyDate.getDate() === currentDate.getDate() &&
+      hourlyDate.getHours() === currentDate.getHours()
+    );
+  });
 
   const getAverageHumidity = (arr: number[]) => {
     let some = 0;
@@ -16,7 +25,9 @@ export function weatherMap(raw: WeatherAPI): Weather {
 
     return Number((some / arr.length).toFixed());
   };
-  
+
+  console.log(raw.hourly.visibility[0]);
+
   return {
     current: {
       units: {
