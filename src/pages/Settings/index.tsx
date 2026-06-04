@@ -1,115 +1,68 @@
-
-
-interface citiesType {
-  name: string,
-  country: string,
-  coordinates: { lat: number; long: number }
-}
+import { Header } from "@/components/Header";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { Skeleton } from "@/components/ui/skeleton";
+import { CoordinatesContext } from "@/contexts/CoordinatesContext";
+import { useLocation, useLocationSearch } from "@/hooks/location/useLocation";
+import type { Location } from "@/services/location/location.types";
+import { ArrowLeft, MapPin, Search } from "lucide-react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function Settings() {
-  // const location = useAppSelector(state => state.location);
-  // const dispatch = useAppDispatch();
-  // const [cities, setCities] = useState<citiesType[]>([]);
-  // const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>('');
+  const locationCoordinates = useLocation();
+  const locationSearch = useLocationSearch(search);
+  const { setCoordinates } = useContext(CoordinatesContext);
+  const navigate = useNavigate();
+  const [cityFocused, setCityFocused] = useState<string | undefined>();
+  const [unitFocused, setUnitFocused] = useState<number | undefined>();
 
-  // useEffect(() => {
-  //   const fetchCities = async () => {
-  //     let res: any;
-  //     let citiesData: citiesType[] = [];
-  //     setCities([])
+  const isLoading = !locationCoordinates.data || !locationSearch.data;
 
-  //     if (search) {
-  //       res = await getCoordinatesBySearch(search);
-  //       if (res.features.length < 1) return
+  useEffect(() => {
+    if (locationCoordinates.data?.city) {
+      setSearch(`${locationCoordinates.data.city} ${locationCoordinates.data.state}`);
+    }
+    
+    setCityFocused(locationCoordinates.data?.id);
+  }, [locationCoordinates.data]);
 
-  //       res.features.forEach((element: any) => {
-  //         citiesData.push({
-  //           name: element.properties.name,
-  //           country: element.properties.context.country.name,
-  //           coordinates: {
-  //             lat: element.properties.coordinates.latitude,
-  //             long: element.properties.coordinates.logitude
-  //           }
-  //         });
-  //       });
-  //     } else {
-  //       res = await getCoordinatesBySearch(location.city);
-  //       if (res.features.length < 1) return
+  useEffect(() => {
+    setUnitFocused(1);
+  }, []);
 
-  //       citiesData = [
-  //         {
-  //           name: res.features[0].properties.name,
-  //           country: res.features[0].properties.context.country.name,
-  //           coordinates: {
-  //             lat: res.features[0].properties.coordinates.latitude,
-  //             long: res.features[0].properties.coordinates.logitude
-  //           }
-  //         },
-  //         {
-  //           name: 'Paris',
-  //           country: 'França',
-  //           coordinates: {
-  //             lat: 48.860067857878086,
-  //             long: 2.3405085443350777
-  //           }
-  //         },
-  //         {
-  //           name: 'Tóquio',
-  //           country: 'japão',
-  //           coordinates: {
-  //             lat: 35.70618879815802,
-  //             long: 139.49496591571125
-  //           }
-  //         },
-  //         {
-  //           name: 'Nova York',
-  //           country: 'Estados Unidos',
-  //           coordinates: {
-  //             lat: 40.71565960777229,
-  //             long: -74.0038526759007
-  //           }
-  //         },
-  //       ]
-  //     }
+  const handleCityClick = (data: Location) => {
+    setCoordinates({
+      lat: data.latitude,
+      long: data.longitude,
+    });
+    console.log(data);
+  };
 
-  //     setCities([...citiesData]);
-  //   }
-
-  //   fetchCities();
-  // }, [location.city, search]);
-
-  // const handleCityClick = (
-  //   city: string,
-  //   country: string,
-  //   coordinates: { lat: number, long: number }
-  // ) => {
-  //   dispatch(changeLocation({
-  //     city,
-  //     country,
-  //     coordinates
-  //   }))
-  // }
+  const handleUnitClick = (id: number) => {
+    console.log(id);
+  };
 
   return (
     <>
-      {/* <Header.Root>
-        <NavLink to={'/'}>
-          <Header.HeaderButton>
-            <ArrowLeft size={24} />
-          </Header.HeaderButton>
-        </NavLink>
+      <Header.Root>
+        <Header.Button onClick={() => navigate('/')}>
+          <ArrowLeft size={24} />
+        </Header.Button>
       </Header.Root>
 
       <main className="flex flex-col items-center w-full ">
         <div className="w-3xl flex flex-col gap-6">
-          <h1 className="text-3xl" id="loc">Localização:</h1>
+          <h1 className="text-3xl font-semibold">Localização</h1>
 
           <InputGroup variant="glassBorder" className="px-6 py-6" >
             <InputGroupInput
               type="text"
               placeholder="Pesquise por uma cidade"
               onChange={(ev) => {
-                setSearch(ev.target.value)
+                setSearch(ev.target.value);
               }}
             />
             <InputGroupAddon>
@@ -117,27 +70,57 @@ export function Settings() {
             </InputGroupAddon>
           </InputGroup>
 
-          <div className="w-full bg-glass border border-glass-border rounded-md overflow-hidden">
-            {cities.map((city, key) => (
-              <Button
-                key={key}
-                variant="ghost"
-                className={`w-full justify-between px-7 py-5 border-s-5 ${city.name === cities[0].name ? 'border-white/65' : 'border-transparent'} rounded-none`}
-                onClick={() => handleCityClick(city.name, city.country, city.coordinates)}
-              >
-                <div className="flex items-center gap-4">
-                  <MapPin size={20} />
-                  <div className="flex flex-col">
-                    <p className="w-fit text-sm">{city.name}</p>
-                    <p className="w-fit text-xs text-muted-foreground p-0">{city.country}</p>
-                  </div>
-                </div>
-              </Button>
-            ))}
-          </div>
+          <Card className="w-full p-0 overflow-hidden">
+            <CardContent>
+              {isLoading ? (
+                <>
+                  {Array.from({ length: 4 }).map((_, id) => (
+                    <div
+                      key={id}
+                      className={`w-full px-7 py-5 rounded-none bg-transparent`}
+                    >
+                      <div className="flex items-center gap-4">
+                        <MapPin size={20} />
+                        <div className="flex flex-col gap-2">
+                          <Skeleton className="w-22 h-4" />
+                          <Skeleton className="w-15 h-3" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <>
+                  {locationSearch.data?.map((data, id) => (
+                    <Button
+                      key={id}
+                      variant="ghost"
+                      className={`w-full justify-between px-7 py-5 rounded-none ${cityFocused === data.id && 'bg-white/30 border-s-5 border-white/80'}`}
+                      onClick={() => handleCityClick(data)}
+                    >
+                      <div className="flex items-center gap-4">
+                        <MapPin size={20} />
+                        <div className="flex flex-col">
+                          <p className="w-fit text-sm">{data.city}</p>
+                          <p className={`w-fit text-xs text-muted-foreground p-0`}>{data.country}</p>
+                        </div>
+                      </div>
+                    </Button>
+                  ))}
+                </>
+              )}
+            </CardContent>
+          </Card>
 
+          <h1 className="text-3xl font-semibold my-2">Unidade de Temperatura</h1>
+
+          <div className="grid grid-1 md:grid-cols-3 gap-x-3 w-full">
+            <Button variant="glassBorder" className={`${unitFocused === 1 && 'bg-white/30'} w-full text-xl py-5 hover:bg-white/30`} onClick={() => handleUnitClick(1)}>Celsius (°C)</Button>
+            <Button variant="glassBorder" className={`${unitFocused === 2 && 'bg-white/30'} w-full text-xl py-5 hover:bg-white/30`} onClick={() => handleUnitClick(2)}>Fahrenheit (°F)</Button>
+            <Button variant="glassBorder" className={`${unitFocused === 3 && 'bg-white/30'} w-full text-xl py-5 hover:bg-white/30`} onClick={() => handleUnitClick(3)}>Kelvin (°K)</Button>
+          </div>
         </div>
-      </main> */}
+      </main>
     </>
   );
 }
