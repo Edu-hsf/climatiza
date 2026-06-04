@@ -12,8 +12,8 @@ interface InputProps extends React.ComponentProps<"input"> {
 
 const variants = {
   default: "border border-input bg-transparent",
-  glass: "glass",
-  glassBorder: "glass-border",
+  glass: "backdrop-blur-md bg-white-20",
+  glassBorder: "border border-white/30 backdrop-blur-md bg-white/10",
 };
 
 function InputGroup({ className, variant = "default", ...props }: InputProps) {
@@ -22,7 +22,7 @@ function InputGroup({ className, variant = "default", ...props }: InputProps) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex w-full items-center rounded-md shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
+        "group/input-group relative flex w-full items-center rounded-xl shadow-xs transition-[color,box-shadow] outline-none dark:bg-input/30",
         "h-9 min-w-0 has-[>textarea]:h-auto",
 
         variants[variant],
