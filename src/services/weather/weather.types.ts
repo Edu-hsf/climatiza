@@ -2,6 +2,8 @@
     WEATHER DA API
 =============================================================== */
 
+import type { LucideIcon } from "lucide-react";
+
 export interface WeatherAPI {
   latitude: number
   longitude: number
@@ -52,6 +54,7 @@ interface HourlyUnits {
   temperature_2m: string
   visibility: string
   weather_code: string
+  relative_humidity_2m: string
 }
 
 interface HourlyWeatherAPI {
@@ -59,6 +62,7 @@ interface HourlyWeatherAPI {
   temperature_2m: number[]
   visibility: number[]
   weather_code: number[]
+  relative_humidity_2m: number[]
 }
 
 interface DailyUnits {
@@ -85,7 +89,22 @@ export interface Weather {
   daily: DailyWeather[]
 }
 
-interface CurrentWeather {
+interface CurrentWeatherUnits {
+  time: string
+  interval: string
+  temperature: string
+  humidity: string
+  isDay: string
+  windSpeed: string
+  apparentTemperature: string
+  precipitation: string
+  pressure: string
+  visibility: string
+  weatherCode: string
+}
+
+export interface CurrentWeather {
+  units: CurrentWeatherUnits
   time: Date
   temperature: number
   apparentTemperature: number
@@ -93,23 +112,43 @@ interface CurrentWeather {
   humidity: number
   pressure: number
   precipitation: number
-  weatherCode: number
-  weatherDescription: string
-  isDay: boolean
-}
-
-interface HourlyWeather {
-  time: Date
-  temperature: number
   visibility: number
   weatherCode: number
   weatherDescription: string
+  weatherIcon: LucideIcon
+  isDay: boolean
 }
 
-interface DailyWeather {
+interface HourlyWeatherUnits {
+  time: string
+  temperature: string
+  weatherCode: string
+}
+
+export interface HourlyWeather {
+  units: HourlyWeatherUnits
+  time: Date
+  temperature: number
+  weatherCode: number
+  weatherDescription: string
+  weatherIcon: LucideIcon
+}
+
+interface DailyWeatherUnits {
+  time: string
+  temperatureMax: string
+  temperatureMin: string
+  humidity: string
+  weatherCode: string
+}
+
+export interface DailyWeather {
+  units: DailyWeatherUnits
   time: Date
   temperatureMax: number
   temperatureMin: number
+  humidity: number
   weatherCode: number
   weatherDescription: string
+  weatherIcon: LucideIcon
 }

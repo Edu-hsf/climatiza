@@ -4,12 +4,12 @@ import { weatherMap } from './weather.mapper';
 import type { WeatherAPI } from './weather.types';
 
 export default async function getWeather(
-    lat: string,
-    long: string,
+    lat: number,
+    long: number,
 ) {
     const params = new URLSearchParams({
-        latitude: lat,
-        longitude: long,
+        latitude: lat.toString(),
+        longitude: long.toString(),
 
         daily: [
             'temperature_2m_max',
@@ -19,6 +19,7 @@ export default async function getWeather(
 
         hourly: [
             'temperature_2m',
+            'relative_humidity_2m',
             'visibility',
             'weather_code',
         ].join(','),

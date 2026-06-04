@@ -46,8 +46,6 @@ body {
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-glass: var(--glass);
-  --color-glass-border: var(--glass-border);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -74,10 +72,8 @@ body {
   --accent-foreground: oklch(88.552% 0.10005 197.13);
   
   /* Glass Effect Components - OKLCH format */
-  --glass: oklch(1 0 0 / 0.1);       /* Background com 10% opacidade */
-  --glass-border: oklch(1 0 0 / 0.2); /* Borda com 20% opacidade */
-  --card: var(--glass);
-  --card-foreground: oklch(0.95 0 0);
+  --card: oklch(1 0 0 / 10%);
+  --card-foreground: #ffffff; 
   
   /* Secondary */
   --secondary: oklch(0.25 0 0);
@@ -116,18 +112,5 @@ body {
   body {
     @apply bg-background text-foreground;
     @apply font-sans;
-  }
-}
-
-@layer components {
-  .glass {
-    @apply backdrop-blur-md;
-    background-color: var(--glass);
-  }
-
-  .glass-border {
-    @apply backdrop-blur-md;
-    background-color: var(--glass);
-    border: 1px solid var(--glass-border);
   }
 }

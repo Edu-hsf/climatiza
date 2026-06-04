@@ -1,15 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import { getLocationByCoordinates, getLocationBySearch } from '@/services/location/location.service';
+import { useContext } from 'react';
+import { CoordinatesContext } from '@/contexts/CoordinatesContext';
 
-export function useLocation(latitude: string, longitude: string) {
+
+export function useLocation() {
+  const { coordinates } = useContext(CoordinatesContext);
+
   return useQuery({
-    queryKey: ['location', latitude, longitude],
+    queryKey: [
+      'location',
+      coordinates?.lat,
+      coordinates?.long,
+    ],
 
-    queryFn: () => getLocationByCoordinates(latitude, longitude),
+    queryFn: () =>
+      getLocationByCoordinates(
+        coordinates!.lat,
+        coordinates!.long,
+      ),
 
-    enabled: Boolean(latitude && longitude),
+    enabled: !!coordinates,
 
     staleTime: 1000 * 60 * 10,
+
+    refetchOnWindowFocus: false,
   });
 }
 

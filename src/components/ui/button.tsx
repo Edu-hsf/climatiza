@@ -11,7 +11,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "default", size = "md", ...props }, ref) => {
     const variants = {
       default: "bg-primary text-primary-foreground shadow-2xl hover:shadow-white/20 cursor-pointer",
-      glass: "bg-glass w-fit h-fit p-3 rounded-full hover:bg-white/15 cursor-pointer transition-opacity",
+      glass: "bg-white/10 w-fit h-fit p-3 rounded-full hover:bg-white/15 cursor-pointer transition-opacity",
       glassBorder: "bg-glass border border-glass-border w-fit h-fit p-3 rounded-full hover:bg-white/15 cursor-pointer transition-opacity",
       ghost: 'bg-transparent hover:bg-white/15 cursor-pointer',
       outline: "border border-glass-border bg-transparent text-foreground hover:bg-white/5",

@@ -1,26 +1,26 @@
 import { useQuery } from '@tanstack/react-query';
 
 import getWeather from '@/services/weather/weather.service';
+import { useContext } from 'react';
+import { CoordinatesContext } from '@/contexts/CoordinatesContext';
 
-export function useWeather(
-  latitude?: string,
-  longitude?: string,
-) {
+export function useWeather() {
+  const { coordinates } = useContext(CoordinatesContext);
+
   return useQuery({
     queryKey: [
       'weather',
-      latitude,
-      longitude,
+      coordinates?.lat,
+      coordinates?.long,
     ],
 
-    queryFn: () =>
+    queryFn: () => 
       getWeather(
-        latitude!,
-        longitude!,
+        coordinates!.lat,
+        coordinates!.long,
       ),
 
-    enabled:
-      !!latitude && !!longitude,
+    enabled: !!coordinates,
 
     staleTime: 1000 * 60 * 10,
 

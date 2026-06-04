@@ -12,6 +12,7 @@ import {
 import {
   ReactQueryDevtools,
 } from '@tanstack/react-query-devtools';
+import { CoordinatesProvider } from './contexts/coordinatesContext';
 
 const queryClient = new QueryClient();
 
@@ -19,14 +20,15 @@ createRoot(
   document.getElementById('root')!,
 ).render(
   <StrictMode>
-    <QueryClientProvider
-      client={queryClient}
-    >
-      <App />
+    <QueryClientProvider client={queryClient} >
+      <CoordinatesProvider>
 
-      <ReactQueryDevtools
-        initialIsOpen={false}
-      />
+        <App />
+
+        {import.meta.env.DEV && (
+          <ReactQueryDevtools initialIsOpen={false} />
+        )}
+      </CoordinatesProvider>
     </QueryClientProvider>
   </StrictMode>,
 );

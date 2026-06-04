@@ -8,7 +8,7 @@ export default function Routes() {
     <RouterSwitch>
       <Route path="/" element={<Home />} />
       <Route path="/settings" element={<Settings/>}/>
-      <Route path="/detailedForecast" element={<DetailedForecast/>}/>
+      <Route path="/detailed-forecast" element={<DetailedForecast/>}/>
     </RouterSwitch>
   );
 }

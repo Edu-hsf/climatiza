@@ -1,30 +1,66 @@
 import { render, screen } from "@testing-library/react";
-import Forecast from ".";
+import { CloudDrizzle } from 'lucide-react';
+import { Forecast } from ".";
 
 describe('Forecast', () => {
-    it('Deve renderizar o componente com as classes corretas', () => {
-        const { container } = render(<Forecast/>);
-        const root = container.firstChild as HTMLElement;
-        
-        expect(root).toHaveClass(
-            'w-full', 
-            'max-w-4xl',
-        );
+    describe('Root', () => {
+        it('deve renderizar o título do componente corretamente', () => {
+            render(
+                <Forecast.Root>
+                    <span></span>
+                </Forecast.Root>,
+            );
+
+            expect(screen.getByText('Previsão horária')).toBeInTheDocument();
+        });
+
+        it('deve renderizar os children corretamente', () => {
+            render(
+                <Forecast.Root>
+                    <span>Card 1</span>
+                    <span>Card 2</span>
+                    <span>Card 3</span>
+                    <span>Card 4</span>
+                </Forecast.Root>,
+            );
+
+            expect(screen.getByText('Card 1')).toBeInTheDocument();
+            expect(screen.getByText('Card 2')).toBeInTheDocument();
+            expect(screen.getByText('Card 3')).toBeInTheDocument();
+            expect(screen.getByText('Card 4')).toBeInTheDocument();
+        });
     });
 
-    it('deve renderizar o título do componente corretamente', () => {
-        render(<Forecast/>);
-        expect(screen.getByText('Previsão horária')).toBeInTheDocument();
-    });
+    describe('Card', () => {
+        it('deve renderizar a hora corretamente', () => {
+            const date = new Date('Sun May 24 2026 10:42:59 GMT-0300');
 
-    it('deve renderizar a estrutura de grid corretamente', () => {
-        render(<Forecast/>);
+            render(
+                <Forecast.Card
+                    time={date}
+                />,
+            );
+            expect(screen.getByText('10:42')).toBeInTheDocument();
+        });
 
-        expect(screen.getByTestId('forecast-grid')).toHaveClass(
-            'grid', 
-            'grid-cols-2', 
-            'md:grid-cols-4', 
-            'gap-4',
-        );
+        it('deve renderizar a temperatura corretamente', () => {
+            render(
+                <Forecast.Card
+                    temperature={23}
+                />,
+            );
+
+            expect(screen.getByText('23°C')).toBeInTheDocument();
+        });
+
+        it('deve renderizar o ícone corretamente', () => {
+            const { container } = render(
+                <Forecast.Card
+                    icon={CloudDrizzle}
+                />,
+            );
+
+            expect(container.querySelector('svg')).toBeInTheDocument();
+        });
     });
 });
