@@ -19,6 +19,7 @@ export default async function getWeather(
 
         hourly: [
             'temperature_2m',
+            'relative_humidity_2m',
             'visibility',
             'weather_code',
         ].join(','),

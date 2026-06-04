@@ -14,9 +14,9 @@ export function weatherMap(raw: WeatherAPI): Weather {
       some += arr[i];
     }
 
-    return some / arr.length;
+    return Number((some / arr.length).toFixed());
   };
-
+  
   return {
     current: {
       units: {
@@ -37,7 +37,7 @@ export function weatherMap(raw: WeatherAPI): Weather {
       apparentTemperature: Number(raw.current.apparent_temperature.toFixed()),
       windSpeed: Number(raw.current.wind_speed_10m.toFixed()),
       humidity: Number(raw.current.relative_humidity_2m.toFixed()),
-      pressure: Number(raw.current.pressure_msl),
+      pressure: Number(raw.current.pressure_msl.toFixed()),
       precipitation: Number(raw.current.precipitation),
       visibility: Number((raw.hourly.visibility[currentIndex] / 1000).toFixed(1)),
       weatherCode: raw.current.weather_code,

@@ -38,6 +38,7 @@ export const weatherMock: WeatherAPI = {
     hourly_units: {
         time: 'iso8601',
         temperature_2m: '°C',
+        relative_humidity_2m: '%',
         visibility: 'm',
         weather_code: 'wmo code',
     },
@@ -49,6 +50,10 @@ export const weatherMock: WeatherAPI = {
 
         temperature_2m: [
             21,
+        ],
+
+        relative_humidity_2m: [
+            79,
         ],
 
         visibility: [
@@ -69,7 +74,7 @@ export const weatherMock: WeatherAPI = {
 
     daily: {
         time: [
-            new Date('2026-05-24T19:00').toISOString(),
+            new Date('2026-05-24').toISOString(),
         ],
 
         temperature_2m_max: [

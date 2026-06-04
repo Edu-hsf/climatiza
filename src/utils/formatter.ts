@@ -56,3 +56,16 @@ export function toFullDateFormat(
     formatted.slice(1)
   );
 }
+
+export function toDayName(date: Date): string {
+  const days = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+  const today = new Date();
+  
+  if (
+    date.getFullYear() === today.getFullYear() &&
+    date.getMonth() === today.getMonth() &&
+    date.getDate() === today.getDate()
+  ) return 'Hoje';
+
+  return days[date.getDay()];
+}

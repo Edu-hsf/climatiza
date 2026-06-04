@@ -1,12 +1,4 @@
-import { Header } from "@/components/Header";
-import { Button } from "@/components/ui/button";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getCoordinatesBySearch } from "@/services/mapBox/mapBoxAPI";
-import { changeLocation } from "@/store/locationSlice";
-import { ArrowLeft, MapPin, Search } from "lucide-react";
-import { useEffect, useState, type EventHandler, type MouseEvent, type MouseEventHandler } from "react";
-import { NavLink } from "react-router-dom";
+
 
 interface citiesType {
   name: string,
@@ -15,92 +7,92 @@ interface citiesType {
 }
 
 export function Settings() {
-  const location = useAppSelector(state => state.location);
-  const dispatch = useAppDispatch();
-  const [cities, setCities] = useState<citiesType[]>([]);
-  const [search, setSearch] = useState<string>('');
+  // const location = useAppSelector(state => state.location);
+  // const dispatch = useAppDispatch();
+  // const [cities, setCities] = useState<citiesType[]>([]);
+  // const [search, setSearch] = useState<string>('');
 
-  useEffect(() => {
-    const fetchCities = async () => {
-      let res: any;
-      let citiesData: citiesType[] = [];
-      setCities([])
+  // useEffect(() => {
+  //   const fetchCities = async () => {
+  //     let res: any;
+  //     let citiesData: citiesType[] = [];
+  //     setCities([])
 
-      if (search) {
-        res = await getCoordinatesBySearch(search);
-        if (res.features.length < 1) return
+  //     if (search) {
+  //       res = await getCoordinatesBySearch(search);
+  //       if (res.features.length < 1) return
 
-        res.features.forEach((element: any) => {
-          citiesData.push({
-            name: element.properties.name,
-            country: element.properties.context.country.name,
-            coordinates: {
-              lat: element.properties.coordinates.latitude,
-              long: element.properties.coordinates.logitude
-            }
-          });
-        });
-      } else {
-        res = await getCoordinatesBySearch(location.city);
-        if (res.features.length < 1) return
+  //       res.features.forEach((element: any) => {
+  //         citiesData.push({
+  //           name: element.properties.name,
+  //           country: element.properties.context.country.name,
+  //           coordinates: {
+  //             lat: element.properties.coordinates.latitude,
+  //             long: element.properties.coordinates.logitude
+  //           }
+  //         });
+  //       });
+  //     } else {
+  //       res = await getCoordinatesBySearch(location.city);
+  //       if (res.features.length < 1) return
 
-        citiesData = [
-          {
-            name: res.features[0].properties.name,
-            country: res.features[0].properties.context.country.name,
-            coordinates: {
-              lat: res.features[0].properties.coordinates.latitude,
-              long: res.features[0].properties.coordinates.logitude
-            }
-          },
-          {
-            name: 'Paris',
-            country: 'França',
-            coordinates: {
-              lat: 48.860067857878086,
-              long: 2.3405085443350777
-            }
-          },
-          {
-            name: 'Tóquio',
-            country: 'japão',
-            coordinates: {
-              lat: 35.70618879815802,
-              long: 139.49496591571125
-            }
-          },
-          {
-            name: 'Nova York',
-            country: 'Estados Unidos',
-            coordinates: {
-              lat: 40.71565960777229,
-              long: -74.0038526759007
-            }
-          },
-        ]
-      }
+  //       citiesData = [
+  //         {
+  //           name: res.features[0].properties.name,
+  //           country: res.features[0].properties.context.country.name,
+  //           coordinates: {
+  //             lat: res.features[0].properties.coordinates.latitude,
+  //             long: res.features[0].properties.coordinates.logitude
+  //           }
+  //         },
+  //         {
+  //           name: 'Paris',
+  //           country: 'França',
+  //           coordinates: {
+  //             lat: 48.860067857878086,
+  //             long: 2.3405085443350777
+  //           }
+  //         },
+  //         {
+  //           name: 'Tóquio',
+  //           country: 'japão',
+  //           coordinates: {
+  //             lat: 35.70618879815802,
+  //             long: 139.49496591571125
+  //           }
+  //         },
+  //         {
+  //           name: 'Nova York',
+  //           country: 'Estados Unidos',
+  //           coordinates: {
+  //             lat: 40.71565960777229,
+  //             long: -74.0038526759007
+  //           }
+  //         },
+  //       ]
+  //     }
 
-      setCities([...citiesData]);
-    }
+  //     setCities([...citiesData]);
+  //   }
 
-    fetchCities();
-  }, [location.city, search]);
+  //   fetchCities();
+  // }, [location.city, search]);
 
-  const handleCityClick = (
-    city: string,
-    country: string,
-    coordinates: { lat: number, long: number }
-  ) => {
-    dispatch(changeLocation({
-      city,
-      country,
-      coordinates
-    }))
-  }
+  // const handleCityClick = (
+  //   city: string,
+  //   country: string,
+  //   coordinates: { lat: number, long: number }
+  // ) => {
+  //   dispatch(changeLocation({
+  //     city,
+  //     country,
+  //     coordinates
+  //   }))
+  // }
 
   return (
     <>
-      <Header.Root>
+      {/* <Header.Root>
         <NavLink to={'/'}>
           <Header.HeaderButton>
             <ArrowLeft size={24} />
@@ -145,7 +137,7 @@ export function Settings() {
           </div>
 
         </div>
-      </main>
+      </main> */}
     </>
   );
 }
