@@ -4,24 +4,24 @@ export default async function locationFetch<T>(
   path: string,
   options: RequestInit = {},
 ): Promise<T> {
-  const response = await fetch(
-    `${BASE_URL}${path}`,
-    {
+  const controller = new AbortController();
+
+  const timeout = setTimeout(() => {
+    controller.abort();
+  }, 10000);
+
+  try {
+    const response = await fetch(`${BASE_URL}${path}`, {
       ...options,
+      signal: controller.signal,
+    });
 
-      headers: {
-        'Content-Type': 'application/json',
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
 
-        ...options.headers,
-      },
-    },
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      'Error in location API request.',
-    );
+    return response.json() as Promise<T>;
+  } finally {
+    clearTimeout(timeout);
   }
-
-  return response.json() as Promise<T>;
 }
