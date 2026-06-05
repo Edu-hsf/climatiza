@@ -1,5 +1,5 @@
 const weatherCodes: Record<number, string> = {
-    0: 'Ensolarado',
+    0: 'Céu limpo',
     1: 'Quase sem nuvens',
     2: 'Parcialmente nublado',
     3: 'Nublado',
