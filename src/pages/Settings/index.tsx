@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Skeleton } from "@/components/ui/skeleton";
 import { CoordinatesContext } from "@/contexts/CoordinatesContext";
+import { TemperatureUnitContext } from "@/contexts/TemperatureUnit";
 import { useLocation, useLocationSearch } from "@/hooks/location/useLocation";
 import type { Location } from "@/services/location/location.types";
 import { ArrowLeft, MapPin, Search } from "lucide-react";
@@ -13,15 +14,16 @@ import { useNavigate } from "react-router-dom";
 
 export function Settings() {
   const [search, setSearch] = useState<string>('');
-  const locationCoordinates = useLocation();
-  const locationSearch = useLocationSearch(search);
-  const { setCoordinates } = useContext(CoordinatesContext);
-  const navigate = useNavigate();
   const [cityFocused, setCityFocused] = useState<string | undefined>();
   const [unitFocused, setUnitFocused] = useState<number | undefined>();
+  const locationCoordinates = useLocation();
+  const locationSearch = useLocationSearch(search);
+  const navigate = useNavigate();
+  const { setCoordinates } = useContext(CoordinatesContext);
+  const { unit, setUnit } = useContext(TemperatureUnitContext);
 
   const isLoading = !locationCoordinates.data || !locationSearch.data;
-  const isError = weather.isError || location.isError;
+  const isError = locationCoordinates.isError || locationSearch.isError;
 
   useEffect(() => {
     if (locationCoordinates.data?.city) {
@@ -32,19 +34,35 @@ export function Settings() {
   }, [locationCoordinates.data]);
 
   useEffect(() => {
-    setUnitFocused(1);
-  }, []);
+    setUnitFocused(unit.id);
+  }, [unit]);
 
   const handleCityClick = (data: Location) => {
     setCoordinates({
       lat: data.latitude,
       long: data.longitude,
     });
-    console.log(data);
   };
 
   const handleUnitClick = (id: number) => {
-    console.log(id);
+    switch (id) {
+      case 1:
+        setUnit({
+          id,
+          name: 'celsius',
+        });
+        break;
+
+      case 2:
+        setUnit({
+          id,
+          name: 'fahrenheit',
+        });
+        break;
+
+      default:
+        break;
+    }
   };
 
   if (isError) return (

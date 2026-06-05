@@ -12,7 +12,8 @@ import {
 import {
   ReactQueryDevtools,
 } from '@tanstack/react-query-devtools';
-import { CoordinatesProvider } from './contexts/coordinatesContext';
+import { CoordinatesProvider } from './contexts/CoordinatesContext';
+import { TemperatureUnitProvider } from './contexts/TemperatureUnit';
 
 const queryClient = new QueryClient();
 
@@ -21,14 +22,16 @@ createRoot(
 ).render(
   <StrictMode>
     <QueryClientProvider client={queryClient} >
-      <CoordinatesProvider>
+      <TemperatureUnitProvider>
+        <CoordinatesProvider>
 
-        <App />
+          <App />
 
-        {import.meta.env.DEV && (
-          <ReactQueryDevtools initialIsOpen={false} />
-        )}
-      </CoordinatesProvider>
+          {import.meta.env.DEV && (
+            <ReactQueryDevtools initialIsOpen={false} />
+          )}
+        </CoordinatesProvider>
+      </TemperatureUnitProvider>
     </QueryClientProvider>
   </StrictMode>,
 );

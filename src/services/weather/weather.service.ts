@@ -6,6 +6,7 @@ import type { WeatherAPI } from './weather.types';
 export default async function getWeather(
     lat: number,
     long: number,
+    temperatureUnit: string,
 ) {
     const params = new URLSearchParams({
         latitude: lat.toString(),
@@ -34,6 +35,8 @@ export default async function getWeather(
             'pressure_msl',
             'weather_code',
         ].join(','),
+
+        temperature_unit: temperatureUnit,
 
         timezone: 'America/Sao_Paulo',
     });

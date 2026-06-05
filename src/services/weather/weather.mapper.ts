@@ -26,8 +26,6 @@ export function weatherMap(raw: WeatherAPI): Weather {
     return Number((some / arr.length).toFixed());
   };
 
-  console.log(raw.hourly.visibility[0]);
-
   return {
     current: {
       units: {
