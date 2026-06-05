@@ -18,10 +18,11 @@ export const TemperatureUnitContext = createContext<TemperatureUnitContextType>(
 
 export function TemperatureUnitProvider({ children }: TemperatureUnitProviderProps) {
     const [unit, setUnit] = useState<Unit>(() => {
-        const val = localStorage.getItem('unit');
-        const unit = JSON.parse(val as string) as Unit;
+        const val = localStorage.getItem('unit');   
 
-        return unit ? unit : { id: 1, name: 'celsius' } as Unit;
+        if (!val) return { id: 1, name: 'celsius' } as Unit;
+
+        return JSON.parse(val as string) as Unit;
     });
 
     useEffect(() =>
