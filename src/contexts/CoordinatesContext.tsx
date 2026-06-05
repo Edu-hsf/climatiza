@@ -17,9 +17,21 @@ interface CoordinatesProviderProps {
 export const CoordinatesContext = createContext<CoordinatesContextType>({} as CoordinatesContextType);
 
 export function CoordinatesProvider({ children }: CoordinatesProviderProps) {
-    const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+    const [coordinates, setCoordinates] = useState<Coordinates | null>(() => {
+        const val = localStorage.getItem('coordinates');
+
+        if (!val) return null;
+
+        return JSON.parse(val as string) as Coordinates;
+    });
 
     useEffect(() => {
+        if (coordinates) {
+            localStorage.setItem("coordinates", JSON.stringify({ lat: coordinates.lat, long: coordinates.long }));
+
+            return;
+        };
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 setCoordinates({
@@ -28,7 +40,7 @@ export function CoordinatesProvider({ children }: CoordinatesProviderProps) {
                 });
             });
         }
-    }, []);
+    }, [coordinates]);
 
     return (
         <CoordinatesContext.Provider value={{ coordinates, setCoordinates }}>
